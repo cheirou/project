@@ -140,12 +140,45 @@
             background: rgba(5, 3, 10, 0.7);
         }
 
-        .embed-container {
-            margin: 15px 0;
-            border: 1px dashed var(--border-color);
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            text-align: center;
+        /* --- FRIENDS CARD GRID & STYLING --- */
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .friend-card {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            background: rgba(5, 3, 10, 0.75);
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .friend-card:hover {
+            border-color: var(--link-color);
+            transform: translateY(-2px);
+        }
+
+        .friend-card h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            color: #fff;
+            border-bottom: 1px dashed var(--border-color);
+            padding-bottom: 4px;
+        }
+
+        .friend-card p {
+            font-size: 0.8rem;
+            margin: 6px 0 10px 0;
+            color: var(--text-color);
+        }
+
+        .friend-links {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 0.85rem;
         }
 
         footer {
@@ -199,12 +232,32 @@
             <!-- Main Content Area -->
             <main>
                 <h2>Friends & Affiliates</h2>
-                <p>My friends.</p>
+                <p>Links and sites from collaborators and cool creators.</p>
                 
                 <hr style="border-color: var(--border-color); margin: 20px 0;">
 
-                <div class="box">
-                    <p style="font-size: 0.6rem;"><em>Do you like me? Be my friend?</em></p>
+                <!-- Friends Boxes Container -->
+                <div class="friends-grid">
+
+                    <!-- Jack -->
+                    <div class="friend-card">
+                        <h3>Jack</h3>
+                        <p>Songwriter</p>
+                        <div class="friend-links">
+                            <a href="https://soundcloud.com/the-new-guy-tunes" target="_blank">Soundcloud</a>
+                            <a href="https://www.youtube.com/@JackVance5" target="_blank">YouTube</a>
+                        </div>
+                    </div>
+
+                    <!-- Jacob -->
+                    <div class="friend-card">
+                        <h3>Jacob Tape</h3>
+                        <p>Messy Music</p>
+                        <div class="friend-links">
+                            <a href="https://jacoblaro.bandcamp.com/" target="_blank">Bandcamp</a>
+                        </div>
+                    </div>
+
                 </div>
             </main>
             
