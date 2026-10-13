@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheirou - Games</title>
+
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
     <style>
         /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
@@ -252,7 +256,7 @@
             <!-- Main Content Area -->
             <main>
                 <h2>Arcade / Games</h2>
-                <p>Self-contained mini-games and interactive experiments.</p>
+                <p>Self-contained mini-games and interactive web experiments.</p>
                 
                 <hr style="border-color: var(--border-color); margin: 20px 0;">
 
@@ -261,7 +265,6 @@
                     <!-- Cheirou Block Card -->
                     <div class="game-card">
                         <a href="block.html" style="text-decoration: none;">
-                            <!-- Placeholder image or fallback text box until block.png is uploaded -->
                             <img src="images/block.png" alt="Cheirou Block" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="game-card-img" style="display:none;">[ Block Game Image ]</div>
                             
@@ -271,11 +274,16 @@
                         <a href="block.html">Play Game &rarr;</a>
                     </div>
 
-                    <!-- Template for Future Games -->
-                    <div class="game-card" style="opacity: 0.6;">
-                        <div class="game-card-img">[ Coming Soon ]</div>
-                        <h3>Project ???</h3>
-                        <p>More browser games in development...</p>
+                    <!-- Tendo NES Emulator Card -->
+                    <div class="game-card">
+                        <a href="tendo.html" style="text-decoration: none;">
+                            <img src="images/tendo.png" alt="Tendo NES Emulator" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="game-card-img" style="display:none;">[ Tendo Emulator Image ]</div>
+                            
+                            <h3>Tendo</h3>
+                        </a>
+                        <p>In-browser NES emulator. Load any .nes ROM file to play 8-bit classics.</p>
+                        <a href="tendo.html">Launch Emulator &rarr;</a>
                     </div>
 
                 </div>
@@ -285,7 +293,7 @@
             <aside id="leftSidebar">
                 <h2>Updates</h2>
                 <div class="box">
-                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Moving away from Google Sites limits to full code customization on GitHub Pages!</p>
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Play Cheirou Block & Tendo NES emulator in browser!</p>
                 </div>
 
                 <!-- Games Landing Page Icon Button -->
