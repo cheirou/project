@@ -49,17 +49,18 @@
         }
 
         #header {
-            width: 100%;
-            background-color: #5e4e8c;
-            height: 150px;
-            background-image: var(--header-image);
-            background-size: cover;
-            background-position: center;
-            border-bottom: 2px solid var(--link-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    width: 100%;
+    height: 150px;
+    background-color: #5e4e8c;
+    background-image: var(--header-image);
+    background-size: cover;          /* Scales image to cover the header box */
+    background-position: bottom center; /* Anchors the image to the bottom */
+    background-repeat: no-repeat;
+    border-bottom: 2px solid var(--link-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
         #header h1 {
             color: #fff;
