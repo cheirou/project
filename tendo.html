@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheirou - Tendo NES Emulator</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- JSNES Emulator CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsnes/2.1.0/jsnes.min.js"></script>
+
+    <style>
+        /* Y2K Grimy & Glitchy Dark Palette Variables */
+        :root {
+            --header-image: url('images/HeaderMaybe.jpg');
+            --body-bg-image: url('images/Body.jpg');
+            --footer-bg-image: url('images/Footer (1).jpg');
+            
+            --body-bg: #05030A;
+            --content-bg: rgba(12, 7, 18, 0.90);
+            --panel-bg: #140D1F;
+            --border-color: #2D1A3B;
+            --text-color: #EADEF0;
+            
+            --link-color: #A8C0D8;
+            --link-hover: #00FFFF;
+        }
+
+        @font-face {
+            font-family: Nunito;
+            src: url('https://neocities.org');
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            background-image: var(--body-bg-image);
+            background-repeat: repeat;
+            background-size: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--content-bg);
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        #container a {
+            color: var(--link-color);
+            font-weight: bold;
+        }
+
+        /* --- HEADER WITH LOGO IMAGE --- */
+        #header {
+            width: 100%;
+            height: 150px;
+            background-color: #140D1F;
+            background-image: var(--header-image);
+            background-size: cover;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #header img.logo {
+            max-height: 80%;
+            max-width: 90%;
+            height: auto;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000) drop-shadow(-1px -1px 0px #2D1A3B);
+        }
+
+        #navbar {
+            background-color: var(--panel-bg);
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        #navbar ul {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        #navbar li {
+            padding: 10px 0;
+        }
+
+        #navbar li a {
+            color: var(--link-color);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        #navbar li a:hover {
+            color: var(--link-hover);
+            text-shadow: 0 0 5px var(--link-hover);
+            text-decoration: underline;
+        }
+
+        #flex {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 15px;
+        }
+
+        main {
+            flex: 3;
+            background-color: rgba(20, 13, 31, 0.65);
+            padding: 20px;
+            border: 1px dashed var(--border-color);
+            text-align: center;
+        }
+
+        aside {
+            flex: 1;
+            background-color: var(--panel-bg);
+            padding: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .box {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-top: 10px;
+            background: rgba(5, 3, 10, 0.7);
+        }
+
+        /* --- EMULATOR UI --- */
+        .emulator-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        #nes-screen {
+            background-color: #000;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 15px rgba(0,0,0,0.9);
+            width: 512px;
+            height: 480px;
+            max-width: 100%;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        .rom-selector {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(5, 3, 10, 0.7);
+            border: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        .rom-selector input[type="file"] {
+            color: var(--text-color);
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .game-controls {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 0.8rem;
+            background: rgba(5, 3, 10, 0.5);
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .game-controls summary {
+            cursor: pointer;
+            color: var(--link-color);
+            font-weight: bold;
+        }
+
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            padding: 25px 10px;
+            background-image: var(--footer-bg-image);
+            background-size: cover;
+            background-position: left center;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            #flex { flex-direction: column; }
+            #nes-screen { width: 100%; height: auto; aspect-ratio: 4/3.5; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        
+        <!-- Header -->
+        <div id="header">
+            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
+        </div>
+        
+        <!-- Navigation Bar -->
+        <div id="headerArea">
+            <nav id="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="gear.html">Gear</a></li>
+                    <li><a href="bandcamp.html">Bandcamp/Merch</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="friends.html">Friends</a></li>
+                    <li><a href="games.html" style="text-decoration: underline; color: var(--text-color);">Games</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="flex">
+            
+            <!-- Main Content Area -->
+            <main>
+                <h2>Tendo NES Emulator</h2>
+                <p>Load an .nes ROM file to play classic 8-bit titles in browser.</p>
+                
+                <hr style="border-color: var(--border-color); margin: 15px 0;">
+
+                <div class="emulator-wrapper">
+                    <!-- ROM File Picker -->
+                    <div class="rom-selector">
+                        <label for="romUpload" style="display:block; margin-bottom:5px; font-size:0.85rem; color:var(--link-color);">Select .NES ROM File:</label>
+                        <input type="file" id="romUpload" accept=".nes">
+                    </div>
+
+                    <!-- Emulator Canvas Screen -->
+                    <canvas id="nes-screen" width="256" height="240"></canvas>
+                </div>
+
+                <details class="game-controls">
+                    <summary>Default Controller Bindings</summary>
+                    <ul style="margin: 5px 0; padding-left: 20px; line-height: 1.5;">
+                        <li><strong>Directional Pad:</strong> Arrow Keys</li>
+                        <li><strong>A Button:</strong> X key</li>
+                        <li><strong>B Button:</strong> Z key</li>
+                        <li><strong>Select:</strong> Shift key</li>
+                        <li><strong>Start:</strong> Enter key</li>
+                    </ul>
+                </details>
+            </main>
+            
+            <!-- Sidebar -->
+            <aside id="leftSidebar">
+                <h2>Updates</h2>
+                <div class="box">
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Tendo NES emulator added to the arcade!</p>
+                </div>
+
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
+                    <li><a href="https://cheirou.bandcamp.com/" target="_blank">Bandcamp</a></li>
+                </ul>
+            </aside>
+
+        </div>
+        
+        <footer>
+            <p>copy wright &copy; 2026 Cheirou.</p>
+        </footer>
+
+    </div>
+
+    <!-- JSNES INITIALIZATION SCRIPT -->
+    <script>
+        /*
+         * JSNES - NES Emulator in JavaScript
+         * Copyright (c) 2010 Ben Firshman and contributors
+         * Licensed under the Apache License, Version 2.0 (the "License");
+         * you may not use this file except in compliance with the License.
+         * You may obtain a copy of the License at
+         * 
+         *     http://www.apache.org/licenses/LICENSE-2.0
+         */
+
+        const canvas = document.getElementById('nes-screen');
+        const ctx = canvas.getContext('2d');
+        const imageData = ctx.createImageData(256, 240);
+
+        // Initialize frame buffer pixel data
+        for (let i = 0; i < imageData.data.length; i += 4) {
+            imageData.data[i + 3] = 255; // Alpha
+        }
+
+        let nes = new jsnes.NES({
+            onFrame: function(frameBuffer) {
+                for (let i = 0; i < frameBuffer.length; i++) {
+                    let pixel = frameBuffer[i];
+                    let j = i * 4;
+                    imageData.data[j]     = (pixel >> 16) & 0xFF; // R
+                    imageData.data[j + 1] = (pixel >> 8) & 0xFF;  // G
+                    imageData.data[j + 2] = pixel & 0xFF;         // B
+                }
+                ctx.putImageData(imageData, 0, 0);
+            },
+            onAudioSample: function(left, right) {
+                // Audio support hook if needed
+            }
+        });
+
+        // Main emulation loop ticker
+        let emulationInterval = null;
+
+        function startEmulation() {
+            if (emulationInterval) clearInterval(emulationInterval);
+            emulationInterval = setInterval(() => {
+                nes.frame();
+            }, 1000 / 60);
+        }
+
+        // File loader handling
+        document.getElementById('romUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                const romData = evt.target.result;
+                try {
+                    nes.loadROM(romData);
+                    startEmulation();
+                } catch (err) {
+                    alert("Error loading ROM: " + err.message);
+                }
+            };
+            reader.readAsBinaryString(file);
+        });
+
+        // Key bindings mapping for JSNES
+        window.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowUp': nes.buttonDown(1, jsnes.Controller.BUTTON_UP); e.preventDefault(); break;
+                case 'ArrowDown': nes.buttonDown(1, jsnes.Controller.BUTTON_DOWN); e.preventDefault(); break;
+                case 'ArrowLeft': nes.buttonDown(1, jsnes.Controller.BUTTON_LEFT); e.preventDefault(); break;
+                case 'ArrowRight': nes.buttonDown(1, jsnes.Controller.BUTTON_RIGHT); e.preventDefault(); break;
+                case 'z': case 'Z': nes.buttonDown(1, jsnes.Controller.BUTTON_B); break;
+                case 'x': case 'X': nes.buttonDown(1, jsnes.Controller.BUTTON_A); break;
+                case 'Shift': nes.buttonDown(1, jsnes.Controller.BUTTON_SELECT); e.preventDefault(); break;
+                case 'Enter': nes.buttonDown(1, jsnes.Controller.BUTTON_START); e.preventDefault(); break;
+            }
+        });
+
+        window.addEventListener('keyup', (e) => {
+            switch(e.key) {
+                case 'ArrowUp': nes.buttonUp(1, jsnes.Controller.BUTTON_UP); break;
+                case 'ArrowDown': nes.buttonUp(1, jsnes.Controller.BUTTON_DOWN); break;
+                case 'ArrowLeft': nes.buttonUp(1, jsnes.Controller.BUTTON_LEFT); break;
+                case 'ArrowRight': nes.buttonUp(1, jsnes.Controller.BUTTON_RIGHT); break;
+                case 'z': case 'Z': nes.buttonUp(1, jsnes.Controller.BUTTON_B); break;
+                case 'x': case 'X': nes.buttonUp(1, jsnes.Controller.BUTTON_A); break;
+                case 'Shift': nes.buttonUp(1, jsnes.Controller.BUTTON_SELECT); break;
+                case 'Enter': nes.buttonUp(1, jsnes.Controller.BUTTON_START); break;
+            }
+        });
+    </script>
+</body>
+</html>
