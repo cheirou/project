@@ -151,16 +151,18 @@
         }
 
         footer {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 0.8rem;
-            border-top: 1px solid var(--link-color);
-            padding: 15px 10px;
-            background-image: var(--footer-bg-image);
-            background-repeat: repeat;
-            background-size: auto;
-            background-position: center;
-        }
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.8rem;
+    border-top: 1px solid var(--link-color);
+    padding: 25px 10px;
+    
+    /* Footer Texture Settings */
+    background-image: var(--footer-bg-image);
+    background-size: cover;       /* Stretches the image to cover the entire footer width */
+    background-position: left center; /* Keeps the light glow anchored to the left */
+    background-repeat: no-repeat;
+}
 
         /* Responsive design for mobile screens */
         @media (max-width: 768px) {
