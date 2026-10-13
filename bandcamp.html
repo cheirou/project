@@ -3,207 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheirou - Home</title>
+    <title>Cheirou - Official Website</title>
     <style>
-        /* Y2K Retro Color Palette Variables */
-        :root {
-            --header-image: url('https://neocities.org');
-            --body-bg-image: url('https://neocities.org');
-            --content-bg: #43256E;
-            --panel-bg: #13092D;
-            --text-color: #fceaff;
-            --link-color: #ED64F5;
-        }
-
-        @font-face {
-            font-family: Nunito;
-            src: url('https://neocities.org');
-        }
-
         body {
-            font-family: 'Nunito', sans-serif;
-            margin: 0;
-            background-color: #08031A;
-            background-size: 65px;
-            color: var(--text-color);
-            background-image: var(--body-bg-image);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        #container {
-            max-width: 900px;
-            margin: 20px auto;
-            background-color: rgba(67, 37, 110, 0.85); /* Semi-transparent content area */
-            padding: 15px;
-            border: 3px double var(--link-color); /* Retro double border */
-        }
-
-        #container a {
-            color: var(--link-color);
-            font-weight: bold;
-        }
-
-        #header {
-            width: 100%;
-            background-color: #5e4e8c;
-            height: 150px;
-            background-image: var(--header-image);
-            background-size: cover;
-            background-position: center;
-            border-bottom: 2px solid var(--link-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-        }
-
-        #header h1 {
-            color: #fff;
-            text-shadow: 2px 2px #000, -2px -2px #000, 2px -2px #000, -2px 2px #000;
-            font-size: 3rem;
-            letter-spacing: 3px;
-        }
-
-        #navbar {
-            height: 40px;
-            background-color: var(--panel-bg);
-            width: 100%;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            border: 1px solid var(--link-color);
-        }
-
-        #navbar ul {
-            display: flex;
-            padding: 0;
+            min-height: 100vh;
             margin: 0;
-            list-style-type: none;
-            justify-content: space-evenly;
-        }
-
-        #navbar li {
-            padding-top: 10px;
-        }
-
-        #navbar li a {
-            color: var(--link-color);
-            font-weight: 800;
-            text-decoration: none;
-        }
-
-        #navbar li a:hover {
-            text-decoration: underline;
-            color: #fff;
-        }
-
-        #flex {
-            display: flex;
-            flex-direction: row-reverse; /* Keeps sidebar on the left, main content on right */
-            gap: 15px;
-        }
-
-        main {
-            flex: 3;
-            background-color: rgba(19, 9, 45, 0.6);
             padding: 20px;
-            border: 1px dashed var(--link-color);
-        }
-
-        aside {
-            flex: 1;
-            background-color: var(--panel-bg);
-            padding: 15px;
-            border: 1px solid var(--link-color);
-        }
-
-        .box {
-            border: 1px solid var(--text-color);
-            padding: 10px;
-            margin-top: 10px;
-            background: rgba(0,0,0,0.3);
-        }
-
-        .embed-container {
-            margin: 15px 0;
-            border: 1px dashed var(--link-color);
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.5);
             text-align: center;
         }
 
-        footer {
-            margin-top: 15px;
-            text-align: center;
-            font-size: 0.8rem;
-            border-top: 1px solid var(--link-color);
-            padding-top: 10px;
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
         }
 
-        /* Responsive design for mobile screens */
-        @media (max-width: 768px) {
-            #flex {
-                flex-direction: column;
-            }
-            #navbar ul {
-                flex-wrap: wrap;
-            }
+        p {
+            font-size: 1.1rem;
+            color: #b3b3b3;
+            margin-bottom: 30px;
+        }
+
+        /* Bandcamp Button Styling */
+        .bandcamp-btn {
+            display: inline-block;
+            background-color: #1ea0c4; /* Bandcamp brand blue */
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(30, 160, 196, 0.3);
+        }
+
+        .bandcamp-btn:hover {
+            background-color: #1986a4;
+            transform: translateY(-2px);
+        }
+
+        .bandcamp-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Text Link Styling */
+        .text-link-container {
+            margin-top: 25px;
+        }
+
+        .text-link {
+            color: #1ea0c4;
+            text-decoration: none;
+            border-bottom: 1px dashed #1ea0c4;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .text-link:hover {
+            color: #ffffff;
+            border-color: #ffffff;
         }
     </style>
 </head>
 <body>
 
-    <div id="container">
-        
-        <!-- Top Banner Header Box -->
-        <div id="header">
-            <h1>CHEIROU</h1>
-        </div>
-        
-        <!-- Navigation Menu Grid -->
-        <div id="headerArea">
-            <nav id="navbar">
-                <ul>
-<li><a href="index.html">Home</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="gear.html">Gear</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="friends.html">Friends</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+    <h1>Cheirou</h1>
+    <p>Listen to music, grab merch, and support directly on Bandcamp.</p>
 
-        <div id="flex">
-            
-            <!-- Main Content Area -->
-            <main>
-             
-            </main>
-            
-            <!-- Side Log Panel -->
-            <aside id="leftSidebar">
-                <h2>Updates</h2>
-                <div class="box">
-                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Moving away from Google Sites limits to full code customization on GitHub Pages!</p>
-                </div>
+    <!-- Option 1a: The Button Link -->
+    <a href="https://cheirou.bandcamp.com/" target="_blank" rel="noopener noreferrer" class="bandcamp-btn">
+        Listen on Bandcamp
+    </a>
 
-                <h2>Connect</h2>
-                <ul style="padding-left: 20px; line-height: 1.8;">
-                    <li><a href="#" target="_blank">TikTok</a></li>
-                    <li><a href="#" target="_blank">YouTube</a></li>
-                    <li><a href="#" target="_blank">Bandcamp</a></li>
-                </ul>
-            </aside>
-
-        </div>
-        
-        <!-- Copyright Footer -->
-        <footer>
-            <p>copy wright &copy; 2026 Cheirou.</p>
-        </footer>
-
+    <!-- Option 1b: Alternative Text Link -->
+    <div class="text-link-container">
+        <span>or visit the </span>
+        <a href="https://cheirou.bandcamp.com/" target="_blank" rel="noopener noreferrer" class="text-link">
+            Cheirou Bandcamp Profile
+        </a>
     </div>
 
 </body>
