@@ -199,6 +199,19 @@
             font-weight: bold;
         }
 
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
         footer {
             margin-top: 15px;
             text-align: center;
@@ -233,10 +246,10 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="gear.html">Gear</a></li>
-                    <li><a href="bandcamp.html">Bandcamp</a></li>
+                    <li><a href="bandcamp.html">Bandcamp/Merch</a></li>
                     <li><a href="blog.html">Blog</a></li>
                     <li><a href="friends.html">Friends</a></li>
-                    <li><a href="game.html" style="text-decoration: underline; color: var(--text-color);">Game</a></li>
+                    <li><a href="games.html" style="text-decoration: underline; color: var(--text-color);">Games</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
@@ -292,12 +305,13 @@
                 <details class="game-controls">
                     <summary>Keyboard Controls</summary>
                     <ul style="margin: 5px 0; padding-left: 20px; line-height: 1.5;">
-                        <li><strong>Left / Right Arrow:</strong> Move Piece</li>
-                        <li><strong>Down Arrow:</strong> Soft Drop</li>
-                        <li><strong>Spacebar:</strong> Hard Drop (Instant)</li>
-                        <li><strong>Up Arrow / X:</strong> Rotate Clockwise</li>
-                        <li><strong>Z / Ctrl:</strong> Rotate Counter-Clockwise</li>
-                        <li><strong>C / Shift:</strong> Hold Piece</li>
+                        <li><strong>A / Left:</strong> Move Left</li>
+                        <li><strong>D / Right:</strong> Move Right</li>
+                        <li><strong>S / Down:</strong> Soft Drop</li>
+                        <li><strong>W / Up:</strong> Hard Drop (Instant)</li>
+                        <li><strong>Space:</strong> Hold Piece</li>
+                        <li><strong>J / Z:</strong> Turn Left (CCW)</li>
+                        <li><strong>K / X:</strong> Turn Right (CW)</li>
                         <li><strong>R:</strong> Restart Game</li>
                     </ul>
                 </details>
@@ -307,10 +321,16 @@
             <aside id="leftSidebar">
                 <h2>Updates</h2>
                 <div class="box">
-                    <p style="font-size: 0.85rem; margin: 0;"><strong>Game Added:</strong> Play Cheirou Block directly in browser!</p>
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Play Cheirou Block directly in browser!</p>
                 </div>
 
-                <h2>Connect</h2>
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
                 <ul style="padding-left: 20px; line-height: 1.8;">
                     <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
                     <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
@@ -336,10 +356,16 @@
         const nextCanvas = document.getElementById('nextCanvas');
         const nextCtx = nextCanvas.getContext('2d');
 
-        // Color theme matching the grimy aesthetic
+        // Darker, muted pastel tones for main blocks
         const COLORS = {
-            I: '#00FFFF', J: '#3A68FF', L: '#FF9900',
-            O: '#FFE600', S: '#39FF14', T: '#E282FF', Z: '#FF2A6D'
+            I: '#4B98A6', J: '#4653A0', L: '#A67343',
+            O: '#9E9447', S: '#4B964D', T: '#8E5EA6', Z: '#A64B5E'
+        };
+
+        // Ghost tint colors (slightly brighter with transparency)
+        const GHOST_COLORS = {
+            I: 'rgba(75, 200, 220, 0.25)', J: 'rgba(80, 100, 230, 0.25)', L: 'rgba(230, 150, 80, 0.25)',
+            O: 'rgba(220, 210, 80, 0.25)', S: 'rgba(80, 220, 90, 0.25)', T: 'rgba(200, 120, 230, 0.25)', Z: 'rgba(230, 80, 100, 0.25)'
         };
 
         const PIECES = {
@@ -352,7 +378,8 @@
             Z: [[[1,1,0],[0,1,1],[0,0,0]], [[0,0,1],[0,1,1],[0,1,0]], [[0,0,0],[1,1,0],[0,1,1]], [[0,1,0],[1,1,0],[1,0,0]]]
         };
 
-        let board, piece, holdPiece, canHold, bag, nextQueue, linesRemaining, score, startTime, gameTimer, isGameOver, lastMoveWasRotate;
+        let board, piece, holdPiece, canHold, bag, nextQueue, linesRemaining, score, startTime, gameTimer, dropTimer, isGameOver, lastMoveWasRotate;
+        let dropInterval = 800; // Auto-fall gravity speed in ms
 
         function init() {
             board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
@@ -364,8 +391,12 @@
             score = 0;
             isGameOver = false;
             startTime = null;
+            dropInterval = 800;
+            
             clearInterval(gameTimer);
+            clearInterval(dropTimer);
             gameTimer = null;
+            dropTimer = null;
             
             fillNextQueue();
             spawnPiece();
@@ -403,6 +434,7 @@
             if (checkCollision(piece.x, piece.y, piece.rot)) {
                 isGameOver = true;
                 clearInterval(gameTimer);
+                clearInterval(dropTimer);
                 document.getElementById('actionText').innerText = "GAME OVER";
             }
         }
@@ -422,6 +454,16 @@
             return false;
         }
 
+        function dropTick() {
+            if (isGameOver) return;
+            if (!checkCollision(piece.x, piece.y + 1, piece.rot)) {
+                piece.y++;
+            } else {
+                lockPiece();
+            }
+            draw();
+        }
+
         function hardDrop() {
             if (isGameOver) return;
             startTimerIfNeeded();
@@ -436,7 +478,6 @@
             const matrix = PIECES[piece.type][piece.rot % PIECES[piece.type].length];
             let isTSpin = false;
 
-            // T-Spin Check
             if (piece.type === 'T' && lastMoveWasRotate) {
                 let corners = 0;
                 [[0,0], [2,0], [0,2], [2,2]].forEach(([cx, cy]) => {
@@ -484,11 +525,19 @@
                 
                 document.getElementById('actionText').innerText = text || "CLEAR";
                 score += (linesCleared * 100) * (isTSpin ? 4 : 1);
+                
+                // Speed up gravity slightly as lines are cleared
+                dropInterval = Math.max(150, 800 - (40 - linesRemaining) * 15);
+                if (dropTimer) {
+                    clearInterval(dropTimer);
+                    dropTimer = setInterval(dropTick, dropInterval);
+                }
             }
 
             if (linesRemaining === 0) {
                 isGameOver = true;
                 clearInterval(gameTimer);
+                clearInterval(dropTimer);
                 document.getElementById('actionText').innerText = "FINISH!";
             }
         }
@@ -532,137 +581,4 @@
 
         function startTimerIfNeeded() {
             if (!startTime) {
-                startTime = Date.now();
-                gameTimer = setInterval(() => {
-                    let elapsed = Date.now() - startTime;
-                    let m = Math.floor(elapsed / 60000);
-                    let s = Math.floor((elapsed % 60000) / 1000);
-                    let ms = Math.floor((elapsed % 1000) / 10);
-                    document.getElementById('timeStat').innerText = 
-                        `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}.${ms.toString().padStart(2,'0')}`;
-                }, 10);
-            }
-        }
-
-        function getGhostY() {
-            let ghostY = piece.y;
-            while (!checkCollision(piece.x, ghostY + 1, piece.rot)) {
-                ghostY++;
-            }
-            return ghostY;
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, boardCanvas.width, boardCanvas.height);
-            
-            // Draw Grid
-            ctx.strokeStyle = '#140D1F';
-            for (let r = 0; r < ROWS; r++) {
-                for (let c = 0; c < COLS; c++) {
-                    ctx.strokeRect(c * BLOCK_SIZE, r * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-                    if (board[r][c]) {
-                        drawBlock(ctx, c, r, COLORS[board[r][c]]);
-                    }
-                }
-            }
-
-            if (!isGameOver && piece) {
-                // Draw Ghost Piece
-                let ghostY = getGhostY();
-                let matrix = PIECES[piece.type][piece.rot % PIECES[piece.type].length];
-                for (let r = 0; r < matrix.length; r++) {
-                    for (let c = 0; c < matrix[r].length; c++) {
-                        if (matrix[r][c]) {
-                            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
-                            ctx.fillRect((piece.x + c) * BLOCK_SIZE, (ghostY + r) * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
-                        }
-                    }
-                }
-
-                // Draw Current Active Piece
-                for (let r = 0; r < matrix.length; r++) {
-                    for (let c = 0; c < matrix[r].length; c++) {
-                        if (matrix[r][c]) {
-                            drawBlock(ctx, piece.x + c, piece.y + r, COLORS[piece.type]);
-                        }
-                    }
-                }
-            }
-        }
-
-        function drawBlock(context, x, y, color) {
-            context.fillStyle = color;
-            context.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
-        }
-
-        function drawPreview(canvas, context, pType) {
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            if (!pType) return;
-            const matrix = PIECES[pType][0];
-            const size = 16;
-            const offsetX = (canvas.width - matrix[0].length * size) / 2;
-            const offsetY = (canvas.height - matrix.length * size) / 2;
-
-            for (let r = 0; r < matrix.length; r++) {
-                for (let c = 0; c < matrix[r].length; c++) {
-                    if (matrix[r][c]) {
-                        context.fillStyle = COLORS[pType];
-                        context.fillRect(offsetX + c * size, offsetY + r * size, size - 1, size - 1);
-                    }
-                }
-            }
-        }
-
-        function drawNextQueue() {
-            nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
-            for (let i = 0; i < 3; i++) {
-                let pType = nextQueue[i];
-                if (!pType) continue;
-                const matrix = PIECES[pType][0];
-                const size = 14;
-                const offsetX = (nextCanvas.width - matrix[0].length * size) / 2;
-                const offsetY = 10 + i * 55;
-
-                for (let r = 0; r < matrix.length; r++) {
-                    for (let c = 0; c < matrix[r].length; c++) {
-                        if (matrix[r][c]) {
-                            nextCtx.fillStyle = COLORS[pType];
-                            nextCtx.fillRect(offsetX + c * size, offsetY + r * size, size - 1, size - 1);
-                        }
-                    }
-                }
-            }
-        }
-
-        function updateUI() {
-            document.getElementById('linesStat').innerText = linesRemaining;
-            document.getElementById('scoreStat').innerText = score;
-            drawPreview(holdCanvas, holdCtx, holdPiece);
-            drawNextQueue();
-        }
-
-        document.addEventListener('keydown', e => {
-            if (["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].includes(e.key)) {
-                e.preventDefault();
-            }
-            if (e.key === 'r' || e.key === 'R') init();
-            if (isGameOver) return;
-
-            switch(e.key) {
-                case 'ArrowLeft': move(-1); break;
-                case 'ArrowRight': move(1); break;
-                case 'ArrowDown': 
-                    startTimerIfNeeded();
-                    if (!checkCollision(piece.x, piece.y + 1, piece.rot)) { piece.y++; score++; draw(); }
-                    break;
-                case ' ': hardDrop(); break;
-                case 'ArrowUp': case 'x': case 'X': rotate(1); break;
-                case 'z': case 'Z': case 'Control': rotate(-1); break;
-                case 'c': case 'C': case 'Shift': hold(); break;
-            }
-        });
-
-        init();
-    </script>
-</body>
-</html>
+                startTime = Date.now
