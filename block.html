@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheirou - Block</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
     <style>
         /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
@@ -362,7 +366,7 @@
             O: '#9E9447', S: '#4B964D', T: '#8E5EA6', Z: '#A64B5E'
         };
 
-        // Ghost tint colors (slightly brighter with transparency)
+        // Ghost tint colors
         const GHOST_COLORS = {
             I: 'rgba(75, 200, 220, 0.25)', J: 'rgba(80, 100, 230, 0.25)', L: 'rgba(230, 150, 80, 0.25)',
             O: 'rgba(220, 210, 80, 0.25)', S: 'rgba(80, 220, 90, 0.25)', T: 'rgba(200, 120, 230, 0.25)', Z: 'rgba(230, 80, 100, 0.25)'
@@ -379,7 +383,16 @@
         };
 
         let board, piece, holdPiece, canHold, bag, nextQueue, linesRemaining, score, startTime, gameTimer, dropTimer, isGameOver, lastMoveWasRotate;
-        let dropInterval = 800; // Auto-fall gravity speed in ms
+        let dropInterval = 800;
+
+        // Smooth DAS / ARR Input State Engine
+        const keysDown = {};
+        let moveTimer = null;
+        let moveDir = 0;
+        let dasTimer = null;
+        let arrInterval = null;
+        const DAS_DELAY = 140; // Ms before rapid auto-repeat triggers
+        const ARR_RATE = 30;   // Ms between repeated moves
 
         function init() {
             board = Array.from({length: ROWS}, () => Array(COLS).fill(0));
@@ -395,8 +408,11 @@
             
             clearInterval(gameTimer);
             clearInterval(dropTimer);
+            clearTimeout(dasTimer);
+            clearInterval(arrInterval);
             gameTimer = null;
             dropTimer = null;
+            moveDir = 0;
             
             fillNextQueue();
             spawnPiece();
@@ -435,6 +451,8 @@
                 isGameOver = true;
                 clearInterval(gameTimer);
                 clearInterval(dropTimer);
+                clearTimeout(dasTimer);
+                clearInterval(arrInterval);
                 document.getElementById('actionText').innerText = "GAME OVER";
             }
         }
@@ -526,7 +544,6 @@
                 document.getElementById('actionText').innerText = text || "CLEAR";
                 score += (linesCleared * 100) * (isTSpin ? 4 : 1);
                 
-                // Speed up gravity slightly as lines are cleared
                 dropInterval = Math.max(150, 800 - (40 - linesRemaining) * 15);
                 if (dropTimer) {
                     clearInterval(dropTimer);
@@ -538,6 +555,8 @@
                 isGameOver = true;
                 clearInterval(gameTimer);
                 clearInterval(dropTimer);
+                clearTimeout(dasTimer);
+                clearInterval(arrInterval);
                 document.getElementById('actionText').innerText = "FINISH!";
             }
         }
@@ -568,6 +587,34 @@
             }
         }
 
+        function handleMoveStart(dir) {
+            if (moveDir === dir) return;
+            moveDir = dir;
+            move(dir);
+            clearTimeout(dasTimer);
+            clearInterval(arrInterval);
+
+            dasTimer = setTimeout(() => {
+                arrInterval = setInterval(() => {
+                    move(moveDir);
+                }, ARR_RATE);
+            }, DAS_DELAY);
+        }
+
+        function handleMoveStop(dir) {
+            if (moveDir === dir) {
+                clearTimeout(dasTimer);
+                clearInterval(arrInterval);
+                if (keysDown['a'] || keysDown['arrowleft']) {
+                    handleMoveStart(-1);
+                } else if (keysDown['d'] || keysDown['arrowright']) {
+                    handleMoveStart(1);
+                } else {
+                    moveDir = 0;
+                }
+            }
+        }
+
         function rotate(dir) {
             if (isGameOver) return;
             startTimerIfNeeded();
@@ -591,7 +638,6 @@
                         `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}.${ms.toString().padStart(2,'0')}`;
                 }, 10);
 
-                // Start auto-fall gravity
                 dropTimer = setInterval(dropTick, dropInterval);
             }
         }
@@ -619,7 +665,7 @@
             }
 
             if (!isGameOver && piece) {
-                // Draw Ghost Piece with subtle color tint
+                // Draw Ghost Piece
                 let ghostY = getGhostY();
                 let matrix = PIECES[piece.type][piece.rot % PIECES[piece.type].length];
                 for (let r = 0; r < matrix.length; r++) {
@@ -697,7 +743,7 @@
             drawNextQueue();
         }
 
-        // Updated WASD & JK controls mapping
+        // Dedicated Keydown Handler
         document.addEventListener('keydown', e => {
             const key = e.key.toLowerCase();
             if (["arrowup","arrowdown","arrowleft","arrowright"," ","w","a","s","d"].includes(key)) {
@@ -706,18 +752,29 @@
             if (key === 'r') init();
             if (isGameOver) return;
 
-            switch(key) {
-                case 'a': case 'arrowleft': move(-1); break;
-                case 'd': case 'arrowright': move(1); break;
-                case 's': case 'arrowdown': 
+            if (!keysDown[key]) {
+                keysDown[key] = true;
+
+                if (key === 'a' || key === 'arrowleft') handleMoveStart(-1);
+                else if (key === 'd' || key === 'arrowright') handleMoveStart(1);
+                else if (key === 's' || key === 'arrowdown') {
                     startTimerIfNeeded();
                     if (!checkCollision(piece.x, piece.y + 1, piece.rot)) { piece.y++; score++; draw(); }
-                    break;
-                case 'w': case 'arrowup': hardDrop(); break;
-                case ' ': hold(); break;
-                case 'j': case 'z': rotate(-1); break; // Turn Left (CCW)
-                case 'k': case 'x': rotate(1); break;  // Turn Right (CW)
+                }
+                else if (key === 'w' || key === 'arrowup') hardDrop();
+                else if (key === ' ') hold();
+                else if (key === 'j' || key === 'z') rotate(-1); // Turn Left (CCW)
+                else if (key === 'k' || key === 'x') rotate(1);  // Turn Right (CW)
             }
+        });
+
+        // Dedicated Keyup Handler
+        document.addEventListener('keyup', e => {
+            const key = e.key.toLowerCase();
+            keysDown[key] = false;
+
+            if (key === 'a' || key === 'arrowleft') handleMoveStop(-1);
+            else if (key === 'd' || key === 'arrowright') handleMoveStop(1);
         });
 
         init();
