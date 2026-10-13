@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheirou - Home</title>
     <style>
-        /* Y2K Retro Color Palette Variables */
+        /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
             --header-image: url('images/HeaderMaybe.jpg');
             --body-bg-image: url('images/Body.jpg');
             --footer-bg-image: url('images/Footer (1).jpg');
-            --content-bg: #43256E;
-            --panel-bg: #13092D;
-            --text-color: #fceaff;
-            --link-color: #ED64F5;
+            
+            --body-bg: #05030A;            /* Deepest shadow fallback */
+            --content-bg: rgba(12, 7, 18, 0.90); /* Grimy translucent charcoal/violet */
+            --panel-bg: #140D1F;           /* Dark panel background */
+            --border-color: #2D1A3B;       /* Low-contrast grimy border */
+            --text-color: #EADEF0;         /* Weathered light pale lilac */
+            --link-color: #E282FF;         /* Bright fleck accent pink */
+            --link-hover: #00FFFF;         /* Glitch cyan hover contrast */
         }
 
         @font-face {
@@ -24,7 +28,7 @@
         body {
             font-family: 'Nunito', sans-serif;
             margin: 0;
-            background-color: #08031A;
+            background-color: var(--body-bg);
             color: var(--text-color);
             background-image: var(--body-bg-image);
             background-repeat: repeat; /* Tiles the texture across the background */
@@ -38,9 +42,10 @@
         #container {
             max-width: 900px;
             margin: 20px auto;
-            background-color: rgba(67, 37, 110, 0.85); /* Semi-transparent content area */
+            background-color: var(--content-bg); /* Seamless grimy content area */
             padding: 15px;
-            border: 3px double var(--link-color); /* Retro double border */
+            border: 2px solid var(--border-color); /* Grimy border */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
         #container a {
@@ -49,24 +54,24 @@
         }
 
         #header {
-    width: 100%;
-    height: 150px;
-    background-color: #5e4e8c;
-    background-image: var(--header-image);
-    background-size: cover;          /* Scales image to cover the header box */
-    background-position: bottom center; /* Anchors the image to the bottom */
-    background-repeat: no-repeat;
-    border-bottom: 2px solid var(--link-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+            width: 100%;
+            height: 150px;
+            background-color: #140D1F;
+            background-image: var(--header-image);
+            background-size: cover;          /* Scales image to cover the header box */
+            background-position: bottom center; /* Anchors the image to the bottom */
+            background-repeat: no-repeat;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         #header h1 {
             color: #fff;
-            text-shadow: 2px 2px #000, -2px -2px #000, 2px -2px #000, -2px 2px #000;
+            text-shadow: 3px 3px 0px #000, -2px -2px 0px #2D1A3B; /* Glitchy dual shadow */
             font-size: 3rem;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
 
         #navbar {
@@ -74,7 +79,7 @@
             width: 100%;
             margin-top: 10px;
             margin-bottom: 10px;
-            border: 1px solid var(--link-color);
+            border: 1px solid var(--border-color);
         }
 
         #navbar ul {
@@ -97,8 +102,9 @@
         }
 
         #navbar li a:hover {
+            color: var(--link-hover); /* Sudden cyan hover for a retro digital glitch feel */
+            text-shadow: 0 0 5px var(--link-hover);
             text-decoration: underline;
-            color: #fff;
         }
 
         #flex {
@@ -109,29 +115,29 @@
 
         main {
             flex: 3;
-            background-color: rgba(19, 9, 45, 0.6);
+            background-color: rgba(20, 13, 31, 0.65);
             padding: 20px;
-            border: 1px dashed var(--link-color);
+            border: 1px dashed var(--border-color);
         }
 
         aside {
             flex: 1;
             background-color: var(--panel-bg);
             padding: 15px;
-            border: 1px solid var(--link-color);
+            border: 1px solid var(--border-color);
         }
 
         .box {
-            border: 1px solid var(--text-color);
+            border: 1px solid var(--border-color);
             padding: 10px;
             margin-top: 10px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(5, 3, 10, 0.7);
         }
 
         /* Responsive video container using modern aspect-ratio */
         .embed-container {
             margin: 15px 0;
-            border: 1px dashed var(--link-color);
+            border: 1px dashed var(--border-color);
             padding: 10px;
             background: rgba(0, 0, 0, 0.5);
         }
@@ -152,18 +158,18 @@
         }
 
         footer {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 0.8rem;
-    border-top: 1px solid var(--link-color);
-    padding: 25px 10px;
-    
-    /* Footer Texture Settings */
-    background-image: var(--footer-bg-image);
-    background-size: cover;       /* Stretches the image to cover the entire footer width */
-    background-position: left center; /* Keeps the light glow anchored to the left */
-    background-repeat: no-repeat;
-}
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            padding: 25px 10px;
+            
+            /* Footer Texture Settings */
+            background-image: var(--footer-bg-image);
+            background-size: cover;        /* Stretches the image to cover the entire footer width */
+            background-position: left center; /* Keeps the light glow anchored to the left */
+            background-repeat: no-repeat;
+        }
 
         /* Responsive design for mobile screens */
         @media (max-width: 768px) {
@@ -215,7 +221,7 @@
                     </div>
                 </div>
 
-                <hr style="border-color: rgba(237, 100, 245, 0.3); margin: 20px 0;">
+                <hr style="border-color: rgba(226, 130, 255, 0.3); margin: 20px 0;">
 
                 <h3>EGG'S MURMUR - 2026</h3>
                 <p><em>Debut album</em></p>
