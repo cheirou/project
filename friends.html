@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheirou - Home</title>
+    <title>Cheirou - Friends</title>
     <style>
-        /* Y2K Retro Color Palette Variables */
+        /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
-            --header-image: url('https://neocities.org');
-            --body-bg-image: url('https://neocities.org');
-            --content-bg: #43256E;
-            --panel-bg: #13092D;
-            --text-color: #fceaff;
-            --link-color: #ED64F5;
+            --header-image: url('images/HeaderMaybe.jpg');
+            --body-bg-image: url('images/Body.jpg');
+            --footer-bg-image: url('images/Footer (1).jpg');
+            
+            --body-bg: #05030A;            /* Deepest shadow fallback */
+            --content-bg: rgba(12, 7, 18, 0.90); /* Grimy translucent charcoal/violet */
+            --panel-bg: #140D1F;           /* Dark panel background */
+            --border-color: #2D1A3B;       /* Low-contrast grimy border */
+            --text-color: #EADEF0;         /* Weathered light pale lilac */
+            
+            --link-color: #A8C0D8;         /* Readable Grey-Blue */
+            --link-hover: #00FFFF;         /* Glitch cyan hover contrast */
         }
 
         @font-face {
@@ -23,10 +29,11 @@
         body {
             font-family: 'Nunito', sans-serif;
             margin: 0;
-            background-color: #08031A;
-            background-size: 65px;
+            background-color: var(--body-bg);
             color: var(--text-color);
             background-image: var(--body-bg-image);
+            background-repeat: repeat; /* Tiles the texture across the background */
+            background-size: auto;
         }
 
         * {
@@ -36,9 +43,10 @@
         #container {
             max-width: 900px;
             margin: 20px auto;
-            background-color: rgba(67, 37, 110, 0.85); /* Semi-transparent content area */
+            background-color: var(--content-bg); /* Seamless grimy content area */
             padding: 15px;
-            border: 3px double var(--link-color); /* Retro double border */
+            border: 2px solid var(--border-color); /* Grimy border */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
         #container a {
@@ -46,33 +54,38 @@
             font-weight: bold;
         }
 
+        /* --- HEADER WITH LOGO IMAGE --- */
         #header {
             width: 100%;
-            background-color: #5e4e8c;
             height: 150px;
+            background-color: #140D1F;
             background-image: var(--header-image);
-            background-size: cover;
-            background-position: center;
-            border-bottom: 2px solid var(--link-color);
+            background-size: cover;          /* Scales image to cover the header box */
+            background-position: bottom center; /* Anchors the image to the bottom */
+            background-repeat: no-repeat;
+            border-bottom: 2px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
-        #header h1 {
-            color: #fff;
-            text-shadow: 2px 2px #000, -2px -2px #000, 2px -2px #000, -2px 2px #000;
-            font-size: 3rem;
-            letter-spacing: 3px;
+        #header img.logo {
+            max-height: 80%;
+            max-width: 90%;
+            height: auto;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000) drop-shadow(-1px -1px 0px #2D1A3B);
         }
 
         #navbar {
-            height: 40px;
             background-color: var(--panel-bg);
             width: 100%;
             margin-top: 10px;
             margin-bottom: 10px;
-            border: 1px solid var(--link-color);
+            border: 1px solid var(--border-color);
         }
 
         #navbar ul {
@@ -81,10 +94,11 @@
             margin: 0;
             list-style-type: none;
             justify-content: space-evenly;
+            flex-wrap: wrap;
         }
 
         #navbar li {
-            padding-top: 10px;
+            padding: 10px 0;
         }
 
         #navbar li a {
@@ -94,8 +108,9 @@
         }
 
         #navbar li a:hover {
+            color: var(--link-hover); /* Sudden cyan hover for a retro digital glitch feel */
+            text-shadow: 0 0 5px var(--link-hover);
             text-decoration: underline;
-            color: #fff;
         }
 
         #flex {
@@ -106,28 +121,28 @@
 
         main {
             flex: 3;
-            background-color: rgba(19, 9, 45, 0.6);
+            background-color: rgba(20, 13, 31, 0.65);
             padding: 20px;
-            border: 1px dashed var(--link-color);
+            border: 1px dashed var(--border-color);
         }
 
         aside {
             flex: 1;
             background-color: var(--panel-bg);
             padding: 15px;
-            border: 1px solid var(--link-color);
+            border: 1px solid var(--border-color);
         }
 
         .box {
-            border: 1px solid var(--text-color);
+            border: 1px solid var(--border-color);
             padding: 10px;
             margin-top: 10px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(5, 3, 10, 0.7);
         }
 
         .embed-container {
             margin: 15px 0;
-            border: 1px dashed var(--link-color);
+            border: 1px dashed var(--border-color);
             padding: 10px;
             background: rgba(0, 0, 0, 0.5);
             text-align: center;
@@ -137,17 +152,20 @@
             margin-top: 15px;
             text-align: center;
             font-size: 0.8rem;
-            border-top: 1px solid var(--link-color);
-            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+            padding: 25px 10px;
+            
+            /* Footer Texture Settings */
+            background-image: var(--footer-bg-image);
+            background-size: cover;        /* Stretches the image to cover the entire footer width */
+            background-position: left center; /* Keeps the light glow anchored to the left */
+            background-repeat: no-repeat;
         }
 
         /* Responsive design for mobile screens */
         @media (max-width: 768px) {
             #flex {
                 flex-direction: column;
-            }
-            #navbar ul {
-                flex-wrap: wrap;
             }
         }
     </style>
@@ -158,19 +176,19 @@
         
         <!-- Top Banner Header Box -->
         <div id="header">
-            <h1>CHEIROU</h1>
+            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
         </div>
         
         <!-- Navigation Menu Grid -->
         <div id="headerArea">
             <nav id="navbar">
                 <ul>
-                   <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="gear.html">Gear</a></li>
                     <li><a href="bandcamp.html">Bandcamp</a></li>
                     <li><a href="blog.html">Blog</a></li>
-                    <li><a href="friends.html" style="text-decoration: underline; color: #fff;">Friends</a></li>
+                    <li><a href="friends.html" style="text-decoration: underline; color: var(--text-color);">Friends</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </nav>
@@ -180,7 +198,14 @@
             
             <!-- Main Content Area -->
             <main>
-             
+                <h2>Friends & Affiliates</h2>
+                <p>Links, buttons, and sites from cool people and collaborators.</p>
+                
+                <hr style="border-color: var(--border-color); margin: 20px 0;">
+
+                <div class="box">
+                    <p style="font-size: 0.9rem;"><em>Affiliate links coming soon...</em></p>
+                </div>
             </main>
             
             <!-- Side Log Panel -->
@@ -192,9 +217,9 @@
 
                 <h2>Connect</h2>
                 <ul style="padding-left: 20px; line-height: 1.8;">
-                    <li><a href="#" target="_blank">TikTok</a></li>
-                    <li><a href="#" target="_blank">YouTube</a></li>
-                    <li><a href="#" target="_blank">Bandcamp</a></li>
+                    <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
+                    <li><a href="https://cheirou.bandcamp.com/" target="_blank">Bandcamp</a></li>
                 </ul>
             </aside>
 
