@@ -1,3 +1,6 @@
+Here is the updated blog.html file, styled with the dark, grimy aesthetic, logo header, updated grey-blue link palette, and styled collapsible accordion dropdowns for your log entries.
+
+HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,14 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheirou - Blog</title>
     <style>
-        /* Y2K Retro Color Palette Variables */
+        /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
-            --header-image: url('https://neocities.org');
-            --body-bg-image: url('https://neocities.org');
-            --content-bg: #43256E;
-            --panel-bg: #13092D;
-            --text-color: #fceaff;
-            --link-color: #ED64F5;
+            --header-image: url('images/HeaderMaybe.jpg');
+            --body-bg-image: url('images/Body.jpg');
+            --footer-bg-image: url('images/Footer (1).jpg');
+            
+            --body-bg: #05030A;            /* Deepest shadow fallback */
+            --content-bg: rgba(12, 7, 18, 0.90); /* Grimy translucent charcoal/violet */
+            --panel-bg: #140D1F;           /* Dark panel background */
+            --border-color: #2D1A3B;       /* Low-contrast grimy border */
+            --text-color: #EADEF0;         /* Weathered light pale lilac */
+            
+            --link-color: #A8C0D8;         /* Readable Grey-Blue */
+            --link-hover: #00FFFF;         /* Glitch cyan hover contrast */
         }
 
         @font-face {
@@ -23,10 +32,11 @@
         body {
             font-family: 'Nunito', sans-serif;
             margin: 0;
-            background-color: #08031A;
-            background-size: 65px;
+            background-color: var(--body-bg);
             color: var(--text-color);
             background-image: var(--body-bg-image);
+            background-repeat: repeat; /* Tiles the texture across the background */
+            background-size: auto;
         }
 
         * {
@@ -36,9 +46,10 @@
         #container {
             max-width: 900px;
             margin: 20px auto;
-            background-color: rgba(67, 37, 110, 0.85); /* Semi-transparent content area */
+            background-color: var(--content-bg); /* Seamless grimy content area */
             padding: 15px;
-            border: 3px double var(--link-color); /* Retro double border */
+            border: 2px solid var(--border-color); /* Grimy border */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
         #container a {
@@ -46,24 +57,30 @@
             font-weight: bold;
         }
 
+        /* --- HEADER WITH LOGO IMAGE --- */
         #header {
             width: 100%;
-            background-color: #5e4e8c;
             height: 150px;
+            background-color: #140D1F;
             background-image: var(--header-image);
-            background-size: cover;
-            background-position: center;
-            border-bottom: 2px solid var(--link-color);
+            background-size: cover;          /* Scales image to cover the header box */
+            background-position: bottom center; /* Anchors the image to the bottom */
+            background-repeat: no-repeat;
+            border-bottom: 2px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
-        #header h1 {
-            color: #fff;
-            text-shadow: 2px 2px #000, -2px -2px #000, 2px -2px #000, -2px 2px #000;
-            font-size: 3rem;
-            letter-spacing: 3px;
+        #header img.logo {
+            max-height: 80%;
+            max-width: 90%;
+            height: auto;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000) drop-shadow(-1px -1px 0px #2D1A3B);
         }
 
         #navbar {
@@ -71,7 +88,7 @@
             width: 100%;
             margin-top: 10px;
             margin-bottom: 10px;
-            border: 1px solid var(--link-color);
+            border: 1px solid var(--border-color);
         }
 
         #navbar ul {
@@ -94,8 +111,9 @@
         }
 
         #navbar li a:hover {
+            color: var(--link-hover); /* Sudden cyan hover for a retro digital glitch feel */
+            text-shadow: 0 0 5px var(--link-hover);
             text-decoration: underline;
-            color: #fff;
         }
 
         #flex {
@@ -106,29 +124,29 @@
 
         main {
             flex: 3;
-            background-color: rgba(19, 9, 45, 0.6);
+            background-color: rgba(20, 13, 31, 0.65);
             padding: 20px;
-            border: 1px dashed var(--link-color);
+            border: 1px dashed var(--border-color);
         }
 
         aside {
             flex: 1;
             background-color: var(--panel-bg);
             padding: 15px;
-            border: 1px solid var(--link-color);
+            border: 1px solid var(--border-color);
         }
 
         .box {
-            border: 1px solid var(--text-color);
+            border: 1px solid var(--border-color);
             padding: 10px;
             margin-top: 10px;
-            background: rgba(0,0,0,0.3);
+            background: rgba(5, 3, 10, 0.7);
         }
 
         /* --- Collapsible Dropdown / Accordion Styling --- */
         details {
             background-color: var(--panel-bg);
-            border: 1px solid var(--link-color);
+            border: 1px solid var(--border-color);
             margin-bottom: 12px;
             border-radius: 4px;
             overflow: hidden;
@@ -136,8 +154,8 @@
         }
 
         details[open] {
-            background-color: rgba(19, 9, 45, 0.9);
-            border-color: #fff;
+            background-color: rgba(12, 7, 18, 0.95);
+            border-color: var(--link-color);
         }
 
         summary {
@@ -151,12 +169,12 @@
             justify-content: space-between;
             align-items: center;
             user-select: none;
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: rgba(0, 0, 0, 0.4);
         }
 
         summary:hover {
-            background-color: rgba(237, 100, 245, 0.15);
-            color: #fff;
+            background-color: rgba(45, 26, 59, 0.5);
+            color: var(--link-hover);
         }
 
         /* Custom Dropdown Arrow */
@@ -169,15 +187,15 @@
 
         details[open] summary::after {
             transform: rotate(90deg);
-            color: #fff;
+            color: var(--link-hover);
         }
 
         .blog-content {
             padding: 15px;
             line-height: 1.6;
             color: var(--text-color);
-            border-top: 1px dashed rgba(237, 100, 245, 0.4);
-            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px dashed var(--border-color);
+            background: rgba(5, 3, 10, 0.5);
             font-size: 0.95rem;
         }
 
@@ -185,8 +203,14 @@
             margin-top: 15px;
             text-align: center;
             font-size: 0.8rem;
-            border-top: 1px solid var(--link-color);
-            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+            padding: 25px 10px;
+            
+            /* Footer Texture Settings */
+            background-image: var(--footer-bg-image);
+            background-size: cover;        /* Stretches the image to cover the entire footer width */
+            background-position: left center; /* Keeps the light glow anchored to the left */
+            background-repeat: no-repeat;
         }
 
         /* Responsive design for mobile screens */
@@ -203,7 +227,7 @@
         
         <!-- Top Banner Header Box -->
         <div id="header">
-            <h1>CHEIROU</h1>
+            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
         </div>
         
         <!-- Navigation Menu Grid -->
@@ -214,7 +238,7 @@
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="gear.html">Gear</a></li>
                     <li><a href="bandcamp.html">Bandcamp</a></li>
-                    <li><a href="blog.html" style="text-decoration: underline; color: #fff;">Blog</a></li>
+                    <li><a href="blog.html" style="text-decoration: underline; color: var(--text-color);">Blog</a></li>
                     <li><a href="friends.html">Friends</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -230,8 +254,15 @@
                 
                 <hr style="border-color: var(--link-color); margin: 20px 0;">
 
-                <!-- Entry: 10/11/2026 (Open by default) -->
-                <details open>
+                                <!-- Entry: 10/13/2026 -->
+                <details>
+                    <summary>10/13/2026</summary>
+                    <div class="blog-content">
+                       Okay, I've spent the last couple days remaking the site in actual html/css.  It's not professional, but I'm much much more satisfied with the control and aesthetic.  I've also made decent progress on the album art for my upcoming album.  Web development is a little monotonous for me, so I'll call it here.  Thanks!
+                    </div>
+                </details>
+                
+                <!-- Entry: 10/11/2026  -->
                     <summary>10/11/2026</summary>
                     <div class="blog-content">
                         I haven't actually done anything involving web design yet today, I'm just adding another entry because it feels nice to do. I like seeing the little dropdown bars all in a row. I'm definitely throwing a lot on my plate music-wise right now. I have proper music distribution in the pipeline, as well as plans to promote the release with a music video. Also, the site naturally, and some less pressing things to consider such as CDs. I want to see if I can go about creating pop-up windows through the embedding function here. I'm tired and it's not even due to physical exaustion. With some personal challenges to overcome, my capacity to keep my cool is not at its best. I'm fortunate to have the ability to play music, which lets me get some of this turmoil settled down.
@@ -253,6 +284,7 @@
                         I just started working on this website. Not sure if this will even become something worth using. My attention shifts around erratically, so we are yet to see if I'll stick with this. I may just end up making something from scratch, but for now, my html and css is too rusty for that. Is this going to be readable in the future? Who knows? Thank you!
                     </div>
                 </details>
+
 
             </main>
             
