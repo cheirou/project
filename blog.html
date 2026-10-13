@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheirou - Home</title>
+    <title>Cheirou - Blog</title>
     <style>
         /* Y2K Retro Color Palette Variables */
         :root {
@@ -67,7 +67,6 @@
         }
 
         #navbar {
-            height: 40px;
             background-color: var(--panel-bg);
             width: 100%;
             margin-top: 10px;
@@ -81,10 +80,11 @@
             margin: 0;
             list-style-type: none;
             justify-content: space-evenly;
+            flex-wrap: wrap;
         }
 
         #navbar li {
-            padding-top: 10px;
+            padding: 10px 0;
         }
 
         #navbar li a {
@@ -125,12 +125,60 @@
             background: rgba(0,0,0,0.3);
         }
 
-        .embed-container {
-            margin: 15px 0;
-            border: 1px dashed var(--link-color);
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            text-align: center;
+        /* --- Collapsible Dropdown / Accordion Styling --- */
+        details {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--link-color);
+            margin-bottom: 12px;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        details[open] {
+            background-color: rgba(19, 9, 45, 0.9);
+            border-color: #fff;
+        }
+
+        summary {
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 1.05rem;
+            color: var(--link-color);
+            cursor: pointer;
+            list-style: none; /* Removes default browser marker */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        summary:hover {
+            background-color: rgba(237, 100, 245, 0.15);
+            color: #fff;
+        }
+
+        /* Custom Dropdown Arrow */
+        summary::after {
+            content: "►";
+            font-size: 0.8rem;
+            transition: transform 0.2s ease;
+            color: var(--link-color);
+        }
+
+        details[open] summary::after {
+            transform: rotate(90deg);
+            color: #fff;
+        }
+
+        .blog-content {
+            padding: 15px;
+            line-height: 1.6;
+            color: var(--text-color);
+            border-top: 1px dashed rgba(237, 100, 245, 0.4);
+            background: rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
         }
 
         footer {
@@ -145,9 +193,6 @@
         @media (max-width: 768px) {
             #flex {
                 flex-direction: column;
-            }
-            #navbar ul {
-                flex-wrap: wrap;
             }
         }
     </style>
@@ -165,10 +210,11 @@
         <div id="headerArea">
             <nav id="navbar">
                 <ul>
-                 <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="gear.html">Gear</a></li>
                     <li><a href="bandcamp.html">Bandcamp</a></li>
+                    <li><a href="blog.html" style="text-decoration: underline; color: #fff;">Blog</a></li>
                     <li><a href="friends.html">Friends</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
@@ -179,32 +225,5 @@
             
             <!-- Main Content Area -->
             <main>
-              
-            </main>
-            
-            <!-- Side Log Panel -->
-            <aside id="leftSidebar">
-                <h2>Updates</h2>
-                <div class="box">
-                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Moving away from Google Sites limits to full code customization on GitHub Pages!</p>
-                </div>
-
-                <h2>Connect</h2>
-                <ul style="padding-left: 20px; line-height: 1.8;">
-                    <li><a href="#" target="_blank">TikTok</a></li>
-                    <li><a href="#" target="_blank">YouTube</a></li>
-                    <li><a href="#" target="_blank">Bandcamp</a></li>
-                </ul>
-            </aside>
-
-        </div>
-        
-        <!-- Copyright Footer -->
-        <footer>
-            <p>copy wright &copy; 2026 Cheirou. Powered by GitHub Pages.</p>
-        </footer>
-
-    </div>
-
-</body>
-</html>
+                <h2>Log Entries</h2>
+                <p>Click on any date to open and
