@@ -142,6 +142,30 @@
             background: rgba(5, 3, 10, 0.7);
         }
 
+        /* --- SIDEBAR GAMES BUTTON STYLING --- */
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container a {
+            display: block;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        .games-button-container a:hover {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 6px var(--link-hover));
+        }
+
         /* Responsive video container using modern aspect-ratio */
         .embed-container {
             margin: 15px 0;
@@ -248,7 +272,14 @@
                     <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Moving away from Google Sites limits to full code customization on GitHub Pages!</p>
                 </div>
 
-                <h2>Connect</h2>
+                <!-- Games Landing Page Icon Button -->
+                <div class="games-button-container">
+                    <a href="game.html" title="Play Cheirou Games">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
                 <ul style="padding-left: 20px; line-height: 1.8;">
                     <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
                     <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
