@@ -7,8 +7,9 @@
     <style>
         /* Y2K Retro Color Palette Variables */
         :root {
-            --header-image: url('https://neocities.org');
-            --body-bg-image: url('https://neocities.org');
+            --header-image: url('HeaderMaybe.jpg');
+            --body-bg-image: url('Body.jpg');
+            --footer-bg-image: url('Footer (1).jpg');
             --content-bg: #43256E;
             --panel-bg: #13092D;
             --text-color: #fceaff;
@@ -24,9 +25,10 @@
             font-family: 'Nunito', sans-serif;
             margin: 0;
             background-color: #08031A;
-            background-size: 65px;
             color: var(--text-color);
             background-image: var(--body-bg-image);
+            background-repeat: repeat; /* Tiles the texture across the background */
+            background-size: auto;
         }
 
         * {
@@ -153,7 +155,11 @@
             text-align: center;
             font-size: 0.8rem;
             border-top: 1px solid var(--link-color);
-            padding-top: 10px;
+            padding: 15px 10px;
+            background-image: var(--footer-bg-image);
+            background-repeat: repeat;
+            background-size: auto;
+            background-position: center;
         }
 
         /* Responsive design for mobile screens */
