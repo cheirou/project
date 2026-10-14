@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheirou - Friends</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
     <style>
         /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
@@ -32,7 +36,7 @@
             background-color: var(--body-bg);
             color: var(--text-color);
             background-image: var(--body-bg-image);
-            background-repeat: repeat; /* Tiles the texture across the background */
+            background-repeat: repeat;
             background-size: auto;
         }
 
@@ -43,9 +47,9 @@
         #container {
             max-width: 900px;
             margin: 20px auto;
-            background-color: var(--content-bg); /* Seamless grimy content area */
+            background-color: var(--content-bg);
             padding: 15px;
-            border: 2px solid var(--border-color); /* Grimy border */
+            border: 2px solid var(--border-color);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
@@ -60,8 +64,8 @@
             height: 150px;
             background-color: #140D1F;
             background-image: var(--header-image);
-            background-size: cover;          /* Scales image to cover the header box */
-            background-position: bottom center; /* Anchors the image to the bottom */
+            background-size: cover;
+            background-position: bottom center;
             background-repeat: no-repeat;
             border-bottom: 2px solid var(--border-color);
             display: flex;
@@ -108,14 +112,14 @@
         }
 
         #navbar li a:hover {
-            color: var(--link-hover); /* Sudden cyan hover for a retro digital glitch feel */
+            color: var(--link-hover);
             text-shadow: 0 0 5px var(--link-hover);
             text-decoration: underline;
         }
 
         #flex {
             display: flex;
-            flex-direction: row-reverse; /* Keeps sidebar on the left, main content on right */
+            flex-direction: row-reverse;
             gap: 15px;
         }
 
@@ -181,21 +185,86 @@
             font-size: 0.85rem;
         }
 
+        /* --- ANIMAL FRIENDS PHOTO GRID --- */
+        .animal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .animal-card {
+            background: rgba(5, 3, 10, 0.85);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* Special Dog Bone Background Pattern Styling */
+        .animal-card.dog-bone-bg {
+            background-image: url('images/dogbone.png');
+            background-repeat: repeat;
+            background-size: 80px auto;
+            border-color: #5A3D28;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+        }
+
+        .animal-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--link-hover);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.25);
+        }
+
+        .animal-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            background-color: #0A0512;
+            display: block;
+        }
+
+        .animal-card .caption {
+            font-size: 0.85rem;
+            margin-top: 8px;
+            color: var(--text-color);
+            font-weight: bold;
+            background: rgba(5, 3, 10, 0.85);
+            padding: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- SIDEBAR BUTTON --- */
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        .games-button-container a:hover {
+            filter: drop-shadow(0 0 6px var(--link-hover));
+        }
+
         footer {
             margin-top: 15px;
             text-align: center;
             font-size: 0.8rem;
             border-top: 1px solid var(--border-color);
             padding: 25px 10px;
-            
-            /* Footer Texture Settings */
             background-image: var(--footer-bg-image);
-            background-size: cover;        /* Stretches the image to cover the entire footer width */
-            background-position: left center; /* Keeps the light glow anchored to the left */
+            background-size: cover;
+            background-position: left center;
             background-repeat: no-repeat;
         }
 
-        /* Responsive design for mobile screens */
         @media (max-width: 768px) {
             #flex {
                 flex-direction: column;
@@ -212,7 +281,7 @@
             <img src="images/logo.png" alt="Cheirou Logo" class="logo">
         </div>
         
-        <!-- Navigation Menu Grid -->
+        <!-- Navigation Menu -->
         <div id="headerArea">
             <nav id="navbar">
                 <ul>
@@ -259,6 +328,25 @@
                     </div>
 
                 </div>
+
+                <hr style="border-color: var(--border-color); margin: 30px 0 20px 0;">
+
+                <!-- Animal Friends Section -->
+                <h2>Animal Friends</h2>
+                <p>Pets, strays, and creature companions.</p>
+
+                <div class="animal-grid">
+
+                    <!-- Dog Friend Card with Tiled Bone Background -->
+                    <div class="animal-card dog-bone-bg">
+                        <a href="images/friends/dogfriend.jpg" target="_blank">
+                            <img src="images/friends/dogfriend.jpg" alt="Dog Friend" onerror="this.src='images/dogfriend.jpg'">
+                        </a>
+                        <div class="caption">Dog Friend</div>
+                    </div>
+
+                </div>
+
             </main>
             
             <!-- Side Log Panel -->
@@ -268,7 +356,14 @@
                     <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Moving away from Google Sites limits to full code customization on GitHub Pages!</p>
                 </div>
 
-                <h2>Connect</h2>
+                <!-- Games Landing Page Icon Button -->
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
                 <ul style="padding-left: 20px; line-height: 1.8;">
                     <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
                     <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
