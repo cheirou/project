@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheirou - Gear Detail</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <style>
+        /* Y2K Grimy & Glitchy Dark Palette Variables */
+        :root {
+            --header-image: url('images/HeaderMaybe.jpg');
+            --body-bg-image: url('images/Body.jpg');
+            --footer-bg-image: url('images/Footer (1).jpg');
+            
+            --body-bg: #05030A;
+            --content-bg: rgba(12, 7, 18, 0.90);
+            --panel-bg: #140D1F;
+            --border-color: #2D1A3B;
+            --text-color: #EADEF0;
+            
+            --link-color: #A8C0D8;
+            --link-hover: #00FFFF;
+        }
+
+        @font-face {
+            font-family: Nunito;
+            src: url('https://neocities.org');
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            background-image: var(--body-bg-image);
+            background-repeat: repeat;
+            background-size: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--content-bg);
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        #container a {
+            color: var(--link-color);
+            font-weight: bold;
+        }
+
+        #header {
+            width: 100%;
+            height: 150px;
+            background-color: #140D1F;
+            background-image: var(--header-image);
+            background-size: cover;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #header img.logo {
+            max-height: 80%;
+            max-width: 90%;
+            height: auto;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000) drop-shadow(-1px -1px 0px #2D1A3B);
+        }
+
+        #navbar {
+            background-color: var(--panel-bg);
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        #navbar ul {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        #navbar li {
+            padding: 10px 0;
+        }
+
+        #navbar li a {
+            color: var(--link-color);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        #navbar li a:hover {
+            color: var(--link-hover);
+            text-shadow: 0 0 5px var(--link-hover);
+            text-decoration: underline;
+        }
+
+        #flex {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 15px;
+        }
+
+        main {
+            flex: 3;
+            background-color: rgba(20, 13, 31, 0.65);
+            padding: 20px;
+            border: 1px dashed var(--border-color);
+        }
+
+        aside {
+            flex: 1;
+            background-color: var(--panel-bg);
+            padding: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .box {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-top: 10px;
+            background: rgba(5, 3, 10, 0.7);
+        }
+
+        /* --- GEAR DETAIL STYLING --- */
+        .gear-detail-box {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(5, 3, 10, 0.75);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+        }
+
+        .gear-img-container {
+            width: 100%;
+            max-height: 300px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: #0A0512;
+            text-align: center;
+        }
+
+        .gear-img-container img {
+            max-width: 100%;
+            height: auto;
+            max-height: 280px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            padding: 25px 10px;
+            background-image: var(--footer-bg-image);
+            background-size: cover;
+            background-position: left center;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            #flex { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        
+        <!-- Header -->
+        <div id="header">
+            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
+        </div>
+        
+        <!-- Navigation Menu -->
+        <div id="headerArea">
+            <nav id="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="gear.html" style="text-decoration: underline; color: var(--text-color);">Gear</a></li>
+                    <li><a href="bandcamp.html">Bandcamp/Merch</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="friends.html">Friends</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="flex">
+            
+            <!-- Main Content Area -->
+            <main>
+                <a href="gear.html" class="back-link">&larr; Back to Gear List</a>
+                
+                <div class="gear-detail-box">
+                    <!-- Dynamic Title (Optional JS updates this based on URL, or you just type it in) -->
+                    <h2 id="gear-title" style="margin: 0; color: var(--link-hover);">Gear Item Name</h2>
+                    <p id="gear-category" style="margin: 0; font-size: 0.85rem; color: #8A7B9B;">Category / Brand</p>
+                    
+                    <hr style="border-color: var(--border-color); margin: 5px 0;">
+
+                    <div class="gear-img-container">
+                        <img id="gear-image" src="images/gear/placeholder.jpg" alt="Gear Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display:none; padding: 40px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                    </div>
+
+                    <div id="gear-description" style="font-size: 0.9rem; line-height: 1.6;">
+                        <p>Write your detailed notes, specs, signal chain placement, or thoughts on this piece of equipment here.</p>
+                    </div>
+                </div>
+            </main>
+            
+            <!-- Side Log Panel -->
+            <aside id="leftSidebar">
+                <h2>Updates</h2>
+                <div class="box">
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Studio gear archive online.</p>
+                </div>
+
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
+                    <li><a href="https://cheirou.bandcamp.com/" target="_blank">Bandcamp</a></li>
+                </ul>
+            </aside>
+
+        </div>
+        
+        <footer>
+            <p>copy wright &copy; 2026 Cheirou.</p>
+        </footer>
+
+    </div>
+
+    <!-- Optional JavaScript to dynamically populate gear details if using URL parameters -->
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const item = params.get('item');
+        
+        // Example dictionary of gear items so you only need ONE HTML file!
+        const gearDatabase = {
+            'synth1': {
+                name: 'Korg Minilogue',
+                category: 'Synthesizers / Hardware',
+                image: 'images/gear/minilogue.jpg',
+                desc: 'Polyphonic analog synthesizer used heavily for warm pads and lead melodies across the upcoming album.'
+            },
+            'pedal1': {
+                name: 'Boss DS-1',
+                category: 'Guitar Pedals / Distortion',
+                image: 'images/gear/ds1.jpg',
+                desc: 'Classic distortion pedal modified for grimy crunch and texture layering.'
+            }
+        };
+
+        if (item && gearDatabase[item]) {
+            document.getElementById('gear-title').innerText = gearDatabase[item].name;
+            document.getElementById('gear-category').innerText = gearDatabase[item].category;
+            document.getElementById('gear-image').src = gearDatabase[item].image;
+            document.getElementById('gear-description').innerHTML = `<p>${gearDatabase[item].desc}</p>`;
+        }
+    </script>
+</body>
+</html>
