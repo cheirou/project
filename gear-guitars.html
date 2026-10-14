@@ -255,7 +255,11 @@
 
 <details>
     <!-- This part stays visible all the time and acts as the clickable bar -->
-    <summary>
+   
+
+    <!-- This part drops down when clicked -->
+    <div class="gear-dropdown-content">
+ <summary>
                 <div class="gear-detail-box">
                     <!-- Dynamic Title (Optional JS updates this based on URL, or you just type it in) -->
                     <h2 id="gear-title" style="margin: 0; color: var(--link-hover);">Gear Item Name</h2>
@@ -268,12 +272,6 @@
                         <div style="display:none; padding: 40px; color: var(--link-color);">[ Gear Photo Slot ]</div>
                     </div>
     </summary>
-
-    <!-- This part drops down when clicked -->
-    <div class="gear-dropdown-content">
-        <div class="gear-img-container">
-            <img src="images/gear/item.jpg" alt="Gear Photo" class="gear-thumb">
-        </div>
         <p>Write your detailed notes, specs, or thoughts here!</p>
     </div>
 </details>
