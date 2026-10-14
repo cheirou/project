@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheirou - Gear / Pedals</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <style>
+        /* Y2K Grimy & Glitchy Dark Palette Variables */
+        :root {
+            --header-image: url('images/HeaderMaybe.jpg');
+            --body-bg-image: url('images/Body.jpg');
+            --footer-bg-image: url('images/Footer (1).jpg');
+            
+            --body-bg: #05030A;
+            --content-bg: rgba(12, 7, 18, 0.90);
+            --panel-bg: #140D1F;
+            --border-color: #2D1A3B;
+            --text-color: #EADEF0;
+            
+            --link-color: #A8C0D8;
+            --link-hover: #00FFFF;
+        }
+
+        @font-face {
+            font-family: Nunito;
+            src: url('https://neocities.org');
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            background-image: var(--body-bg-image);
+            background-repeat: repeat;
+            background-size: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--content-bg);
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        #container a {
+            color: var(--link-color);
+            font-weight: bold;
+        }
+
+        #header {
+            width: 100%;
+            height: 150px;
+            background-color: #140D1F;
+            background-image: var(--header-image);
+            background-size: cover;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #header img.logo {
+            max-height: 80%;
+            max-width: 90%;
+            height: auto;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000) drop-shadow(-1px -1px 0px #2D1A3B);
+        }
+
+        #navbar {
+            background-color: var(--panel-bg);
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        #navbar ul {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        #navbar li {
+            padding: 10px 0;
+        }
+
+        #navbar li a {
+            color: var(--link-color);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        #navbar li a:hover {
+            color: var(--link-hover);
+            text-shadow: 0 0 5px var(--link-hover);
+            text-decoration: underline;
+        }
+
+        #flex {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 15px;
+        }
+
+        main {
+            flex: 3;
+            background-color: rgba(20, 13, 31, 0.65);
+            padding: 20px;
+            border: 1px dashed var(--border-color);
+        }
+
+        aside {
+            flex: 1;
+            background-color: var(--panel-bg);
+            padding: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .box {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-top: 10px;
+            background: rgba(5, 3, 10, 0.7);
+        }
+
+        /* --- SCROLLABLE GEAR LIST CONTAINER --- */
+        .scrollable-gear-list {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+            border: 1px solid var(--border-color);
+            background: rgba(5, 3, 10, 0.5);
+            padding: 10px;
+        }
+
+        /* Custom scrollbar for Y2K look */
+        .scrollable-gear-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollable-gear-list::-webkit-scrollbar-track {
+            background: #05030A;
+        }
+        .scrollable-gear-list::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border: 1px solid var(--link-color);
+        }
+
+        /* --- DROPDOWN GEAR BOXES --- */
+        details {
+            background: rgba(5, 3, 10, 0.85);
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+            transition: border-color 0.2s ease;
+        }
+
+        details[open] {
+            border-color: var(--link-color);
+            box-shadow: 0 0 8px rgba(168, 192, 216, 0.15);
+        }
+
+        summary {
+            padding: 12px 15px;
+            font-weight: bold;
+            color: var(--link-color);
+            cursor: pointer;
+            user-select: none;
+            background: rgba(20, 13, 31, 0.85);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid var(--border-color);
+            color: var(--link-hover);
+        }
+
+        summary:hover {
+            color: var(--link-hover);
+            background: rgba(30, 20, 45, 0.9);
+        }
+
+        .gear-dropdown-content {
+            padding: 15px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            background: rgba(5, 3, 10, 0.7);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .gear-thumb {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border: 1px solid var(--border-color);
+            background: #0A0512;
+            display: block;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            padding: 25px 10px;
+            background-image: var(--footer-bg-image);
+            background-size: cover;
+            background-position: left center;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            #flex { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        
+        <!-- Header -->
+        <div id="header">
+            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
+        </div>
+        
+        <!-- Navigation Menu -->
+        <div id="headerArea">
+            <nav id="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="gear.html" style="text-decoration: underline; color: var(--text-color);">Gear</a></li>
+                    <li><a href="bandcamp.html">Bandcamp/Merch</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="friends.html">Friends</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="flex">
+            
+            <!-- Main Content Area -->
+            <main>
+                <a href="gear.html" class="back-link">&larr; Back to Main Gear Index</a>
+                <h2>Guitar Pedals & Effects</h2>
+                <p>Scroll through the inventory and click any item to view pictures and notes.</p>
+
+                <hr style="border-color: var(--border-color); margin: 20px 0;">
+
+                <!-- Scrollable Container -->
+                <div class="scrollable-gear-list">
+
+                    <!-- Gear Item 1 -->
+                    <details>
+                        <summary>
+                            <span>Boss DS-1 Distortion</span>
+                            <span style="font-size: 0.75rem; color: #8A7B9B;">[Pedal]</span>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <img src="images/gear/ds1.jpg" alt="Boss DS-1" class="gear-thumb" onerror="this.style.display='none';">
+                            <p><strong>Notes:</strong> Modified for extra low-end crunch. Used heavily on rhythm guitar tracks for the grimy distortion layers.</p>
+                            <p style="font-size: 0.8rem; color: #8A7B9B; margin: 0;">Settings: Tone @ 11 o'clock, Distortion @ max.</p>
+                        </div>
+                    </details>
+
+                    <!-- Gear Item 2 -->
+                    <details>
+                        <summary>
+                            <span>Electro-Harmonix Deluxe Memory Man</span>
+                            <span style="font-size: 0.75rem; color: #8A7B9B;">[Delay]</span>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <img src="images/gear/memoryman.jpg" alt="Deluxe Memory Man" class="gear-thumb" onerror="this.style.display='none';">
+                            <p><strong>Notes:</strong> Analog bucket-brigade delay unit. Adds warm, degraded echoes that fit right into the analog noise palette.</p>
+                        </div>
+                    </details>
+
+                    <!-- Gear Item 3 (Template for adding more junk) -->
+                    <details>
+                        <summary>
+                            <span>ProCo RAT 2</span>
+                            <span style="font-size: 0.75rem; color: #8A7B9B;">[Distortion]</span>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <img src="images/gear/rat.jpg" alt="ProCo RAT 2" class="gear-thumb" onerror="this.style.display='none';">
+                            <p><strong>Notes:</strong> Gritty distortion/fuzz hybrid. Great for cutting through mixes with a sharp edge.</p>
+                        </div>
+                    </details>
+
+                </div>
+
+            </main>
+            
+            <!-- Side Log Panel -->
+            <aside id="leftSidebar">
+                <h2>Updates</h2>
+                <div class="box">
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Pedal inventory scrollbox active.</p>
+                </div>
+
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
+                    <li><a href="https://cheirou.bandcamp.com/" target="_blank">Bandcamp</a></li>
+                </ul>
+            </aside>
+
+        </div>
+        
+        <footer>
+            <p>copy wright &copy; 2026 Cheirou.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
