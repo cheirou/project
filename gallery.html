@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheirou - Gallery</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
     <style>
         /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
@@ -140,6 +144,24 @@
             background: rgba(5, 3, 10, 0.7);
         }
 
+        /* --- SIDEBAR BUTTON --- */
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        .games-button-container a:hover {
+            filter: drop-shadow(0 0 6px var(--link-hover));
+        }
+
         /* Responsive container for gallery items */
         .embed-container {
             margin: 15px 0;
@@ -170,43 +192,42 @@
             }
         }
 
-/* --- Gallery Grid Layout --- */
-.gallery-grid {
-    display: grid;
-    /* Creates a responsive column layout; each image will be at least 180px wide */
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
-}
+        /* --- Gallery Grid Layout --- */
+        .gallery-grid {
+            display: grid;
+            /* Creates a responsive column layout; each image will be at least 180px wide */
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
 
-.gallery-item {
-    background: rgba(5, 3, 10, 0.8);
-    border: 1px solid var(--border-color);
-    padding: 8px;
-    text-align: center;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
+        .gallery-item {
+            background: rgba(5, 3, 10, 0.8);
+            border: 1px solid var(--border-color);
+            padding: 8px;
+            text-align: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
 
-.gallery-item:hover {
-    transform: translateY(-3px);
-    border-color: var(--link-color);
-    box-shadow: 0 0 8px rgba(168, 192, 216, 0.3);
-}
+        .gallery-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--link-color);
+            box-shadow: 0 0 8px rgba(168, 192, 216, 0.3);
+        }
 
-.gallery-item img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover; /* Crops photos neatly so they align in uniform boxes */
-    border: 1px solid var(--border-color);
-    display: block;
-}
+        .gallery-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover; /* Crops photos neatly so they align in uniform boxes */
+            border: 1px solid var(--border-color);
+            display: block;
+        }
 
-.gallery-item .caption {
-    font-size: 0.8rem;
-    margin-top: 6px;
-    color: var(--text-color);
-}
-        
+        .gallery-item .caption {
+            font-size: 0.8rem;
+            margin-top: 6px;
+            color: var(--text-color);
+        }
     </style>
 </head>
 <body>
@@ -236,228 +257,225 @@
         <div id="flex">
             
             <!-- Main Content Area -->
-<main>
-    <h2>Gallery</h2>
-    <p>Visual archive <br> Click on any image to view full resolution</p>
-    
-    <hr style="border-color: var(--border-color); margin: 20px 0;">
+            <main>
+                <h2>Gallery</h2>
+                <p>Visual archive <br> Click on any image to view full resolution</p>
+                
+                <hr style="border-color: var(--border-color); margin: 20px 0;">
 
-    <!-- Image Grid Container -->
-    <div class="gallery-grid">
+                <!-- Image Grid Container -->
+                <div class="gallery-grid">
 
-        <!-- Photo 1 -->
-        <div class="gallery-item">
-            <a href="images/gallery/keben.gif" target="_blank">
-                <img src="images/gallery/keben.gif" alt="keben">
-            </a>
-            <div class="caption">"Keben"</div>
-        </div>
+                    <!-- Photo 1 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/keben.gif" target="_blank">
+                            <img src="images/gallery/keben.gif" alt="keben">
+                        </a>
+                        <div class="caption">"Keben"</div>
+                    </div>
 
-        <!-- Photo 2 -->
-        <div class="gallery-item">
-            <a href="images/gallery/dog.png" target="_blank">
-                <img src="images/gallery/dog.png" alt="dog">
-            </a>
-            <div class="caption">"Dog?"</div>
-        </div>
+                    <!-- Photo 2 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/dog.png" target="_blank">
+                            <img src="images/gallery/dog.png" alt="dog">
+                        </a>
+                        <div class="caption">"Dog?"</div>
+                    </div>
 
-        <!-- Photo 3 -->
-        <div class="gallery-item">
-            <a href="images/gallery/toadsmear.jpg" target="_blank">
-                <img src="images/gallery/toadsmear.jpg" alt="toadsmear">
-            </a>
-            <div class="caption">"Toadsmear"</div>
-        </div>
+                    <!-- Photo 3 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/toadsmear.jpg" target="_blank">
+                            <img src="images/gallery/toadsmear.jpg" alt="toadsmear">
+                        </a>
+                        <div class="caption">"Toadsmear"</div>
+                    </div>
 
-        <!-- Photo 4 -->
-        <div class="gallery-item">
-            <a href="images/gallery/HBT.jpg" target="_blank">
-                <img src="images/gallery/HBT.jpg" alt="HBT">
-            </a>
-            <div class="caption">Hellbound Train Album Cover</div>
-        </div>
+                    <!-- Photo 4 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/HBT.jpg" target="_blank">
+                            <img src="images/gallery/HBT.jpg" alt="HBT">
+                        </a>
+                        <div class="caption">Hellbound Train Album Cover</div>
+                    </div>
 
-                <!-- Photo 5 -->
-        <div class="gallery-item">
-            <a href="images/gallery/backhome.jpg" target="_blank">
-                <img src="images/gallery/backhome.jpg" alt="backhome">
-            </a>
-            <div class="caption">Back Home Alien</div>
-        </div>
+                    <!-- Photo 5 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/backhome.jpg" target="_blank">
+                            <img src="images/gallery/backhome.jpg" alt="backhome">
+                        </a>
+                        <div class="caption">Back Home Alien</div>
+                    </div>
 
+                    <!-- Photo 6 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/bar.jpg" target="_blank">
+                            <img src="images/gallery/bar.jpg" alt="bar">
+                        </a>
+                        <div class="caption">Yard</div>
+                    </div>
 
-                <!-- Photo 6 -->
-        <div class="gallery-item">
-            <a href="images/gallery/bar.jpg" target="_blank">
-                <img src="images/gallery/bar.jpg" alt="bar">
-            </a>
-            <div class="caption">Yard</div>
-        </div>
+                    <!-- Photo 7 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/bathroom.jpg" target="_blank">
+                            <img src="images/gallery/bathroom.jpg" alt="bathroom">
+                        </a>
+                        <div class="caption">Bathroom</div>
+                    </div>
 
-                <!-- Photo 7 -->
-        <div class="gallery-item">
-            <a href="images/gallery/bathroom.jpg" target="_blank">
-                <img src="images/gallery/bathroom.jpg" alt="bathroom">
-            </a>
-            <div class="caption">Bathroom</div>
-        </div>
+                    <!-- Photo 8 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/bg.png" target="_blank">
+                            <img src="images/gallery/bg.png" alt="bg">
+                        </a>
+                        <div class="caption">Empty street</div>
+                    </div>
 
-                <!-- Photo 8 -->
-        <div class="gallery-item">
-            <a href="images/gallery/bg.png" target="_blank">
-                <img src="images/gallery/bg.png" alt="bg">
-            </a>
-            <div class="caption">Empty street</div>
-        </div>
+                    <!-- Photo 9 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/bigjake.jpg" target="_blank">
+                            <img src="images/gallery/bigjake.jpg" alt="bigjake">
+                        </a>
+                        <div class="caption">"Big Jake"</div>
+                    </div>
 
-                <!-- Photo 9 -->
-        <div class="gallery-item">
-            <a href="images/gallery/bigjake.jpg" target="_blank">
-                <img src="images/gallery/bigjake.jpg" alt="bigjake">
-            </a>
-            <div class="caption">"Big Jake"</div>
-        </div>
+                    <!-- Photo 10 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/bill.jpg" target="_blank">
+                            <img src="images/gallery/bill.jpg" alt="Bill">
+                        </a>
+                        <div class="caption">Me with Bill</div>
+                    </div>
 
-                <!-- Photo 10 -->
-        <div class="gallery-item">
-            <a href="images/gallery/bill.jpg" target="_blank">
-                <img src="images/gallery/bill.jpg" alt="Bill">
-            </a>
-            <div class="caption">Me with Bill</div>
-        </div>
+                    <!-- Photo 11 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/boys.jpg" target="_blank">
+                            <img src="images/gallery/boys.jpg" alt="boys">
+                        </a>
+                        <div class="caption">"The Boys"</div>
+                    </div>
 
-                <!-- Photo 11 -->
-        <div class="gallery-item">
-            <a href="images/gallery/boys.jpg" target="_blank">
-                <img src="images/gallery/boys.jpg" alt="boys">
-            </a>
-            <div class="caption">"The Boys"</div>
-        </div>
+                    <!-- Photo 12 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/bugs.png" target="_blank">
+                            <img src="images/gallery/bugs.png" alt="bugs">
+                        </a>
+                        <div class="caption">"Water Bugs"</div>
+                    </div>
 
-                <!-- Photo 12 -->
-        <div class="gallery-item">
-            <a href="images/gallery/bugs.png" target="_blank">
-                <img src="images/gallery/bugs.png" alt="bugs">
-            </a>
-            <div class="caption">"Water Bugs"</div>
-        </div>
+                    <!-- Photo 13 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/catscratch.gif" target="_blank">
+                            <img src="images/gallery/catscratch.gif" alt="Cat">
+                        </a>
+                        <div class="caption">"Catscratch"</div>
+                    </div>
 
-                <!-- Photo 13 -->
-        <div class="gallery-item">
-            <a href="images/gallery/catscratch.gif" target="_blank">
-                <img src="images/gallery/catscratch.gif" alt="Cat">
-            </a>
-            <div class="caption">"Catscratch"</div>
-        </div>
+                    <!-- Photo 14 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/conceptartstillness.jpg" target="_blank">
+                            <img src="images/gallery/conceptartstillness.jpg" alt="Stillness">
+                        </a>
+                        <div class="caption">"Stillness" Concept Art</div>
+                    </div>
 
-                <!-- Photo 14 -->
-        <div class="gallery-item">
-            <a href="images/gallery/conceptartstillnes.jpg" target="_blank">
-                <img src="images/gallery/conceptartstillness.jpg" alt="Stillness">
-            </a>
-            <div class="caption">"Stillness" Concept Art</div>
-        </div>
+                    <!-- Photo 15 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/e33.jpg" target="_blank">
+                            <img src="images/gallery/e33.jpg" alt="e33">
+                        </a>
+                        <div class="caption">Painting from "Expedition 33"</div>
+                    </div>
 
-                <!-- Photo 15 -->
-        <div class="gallery-item">
-            <a href="images/gallery/e33.jpg" target="_blank">
-                <img src="images/gallery/e33.jpg" alt="e33">
-            </a>
-            <div class="caption">Painting from "Expedition 33"</div>
-        </div>
+                    <!-- Photo 16 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/familyband.jpg" target="_blank">
+                            <img src="images/gallery/familyband.jpg" alt="familyband">
+                        </a>
+                        <div class="caption">Davisson Brothers Band</div>
+                    </div>
 
-                <!-- Photo 16 -->
-        <div class="gallery-item">
-            <a href="images/gallery/familyband.jpg" target="_blank">
-                <img src="images/gallery/familyband.jpg" alt="familyband">
-            </a>
-            <div class="caption">Davisson Brothers Band</div>
-        </div>
+                    <!-- Photo 17 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/greyhound.jpg" target="_blank">
+                            <img src="images/gallery/greyhound.jpg" alt="greyhound">
+                        </a>
+                        <div class="caption">"Greyhound"</div>
+                    </div>
 
-                <!-- Photo 17 -->
-        <div class="gallery-item">
-            <a href="images/gallery/greyhound.jpg" target="_blank">
-                <img src="images/gallery/greyhound.jpg" alt="greyhound">
-            </a>
-            <div class="caption">"Greyhound"</div>
-        </div>
+                    <!-- Photo 18 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/hex.jpg" target="_blank">
+                            <img src="images/gallery/hex.jpg" alt="hex">
+                        </a>
+                        <div class="caption">Art by Borvar</div>
+                    </div>
 
-                <!-- Photo 18 -->
-        <div class="gallery-item">
-            <a href="images/gallery/hex.jpg" target="_blank">
-                <img src="images/gallery/hex.jpg" alt="hex">
-            </a>
-            <div class="caption">Art by Borvar</div>
-        </div>
+                    <!-- Photo 19 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/japan.jpg" target="_blank">
+                            <img src="images/gallery/japan.jpg" alt="japan">
+                        </a>
+                        <div class="caption">Tiny Toon Adventures</div>
+                    </div>
 
-                <!-- Photo 19 -->
-        <div class="gallery-item">
-            <a href="images/gallery/japan.jpg" target="_blank">
-                <img src="images/gallery/japan.jpg" alt="japan">
-            </a>
-            <div class="caption">Tiny Toon Adventures</div>
-        </div>
+                    <!-- Photo 20 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/manga.jpg" target="_blank">
+                            <img src="images/gallery/manga.jpg" alt="manga">
+                        </a>
+                        <div class="caption">Manga sketch</div>
+                    </div>
 
-                <!-- Photo 20 -->
-        <div class="gallery-item">
-            <a href="images/gallery/manga.jpg" target="_blank">
-                <img src="images/gallery/manga.jpg" alt="manga">
-            </a>
-            <div class="caption">Manga sketch</div>
-        </div>
+                    <!-- Photo 21 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/marriage.jpg" target="_blank">
+                            <img src="images/gallery/marriage.jpg" alt="Marriage">
+                        </a>
+                        <div class="caption">artist unknown</div>
+                    </div>
 
-                <!-- Photo 21 -->
-        <div class="gallery-item">
-            <a href="images/gallery/marriage.jpg" target="_blank">
-                <img src="images/gallery/marriage.jpg" alt="Marriage">
-            </a>
-            <div class="caption">artist unknown</div>
-        </div>
+                    <!-- Photo 22 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/pc.png" target="_blank">
+                            <img src="images/gallery/pc.png" alt="pc">
+                        </a>
+                        <div class="caption">Playing with chromatic abrasion</div>
+                    </div>
 
-                <!-- Photo 22 -->
-        <div class="gallery-item">
-            <a href="images/gallery/pc.png" target="_blank">
-                <img src="images/gallery/pc.png" alt="pc">
-            </a>
-            <div class="caption">Playing with chromatic abrasion</div>
-        </div>
+                    <!-- Photo 23 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/robots.jpg" target="_blank">
+                            <img src="images/gallery/robots.jpg" alt="Robots">
+                        </a>
+                        <div class="caption">Security Robots</div>
+                    </div>
 
-                <!-- Photo 23 -->
-        <div class="gallery-item">
-            <a href="images/gallery/robots.jpg" target="_blank">
-                <img src="images/gallery/robots.jpg" alt="Robots">
-            </a>
-            <div class="caption">Security Robots</div>
-        </div>
+                    <!-- Photo 24 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/sans.jpg" target="_blank">
+                            <img src="images/gallery/sans.jpg" alt="sans">
+                        </a>
+                        <div class="caption">"Sans"</div>
+                    </div>
 
-                <!-- Photo 24 -->
-        <div class="gallery-item">
-            <a href="images/gallery/sans.jpg" target="_blank">
-                <img src="images/gallery/sans.jpg" alt="sans">
-            </a>
-            <div class="caption">"Sans"</div>
-        </div>
+                    <!-- Photo 25 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/xgor.png" target="_blank">
+                            <img src="images/gallery/xgor.png" alt="xgor">
+                        </a>
+                        <div class="caption">"Censored"</div>
+                    </div>
 
-                <!-- Photo 25 -->
-        <div class="gallery-item">
-            <a href="images/gallery/xgor.png" target="_blank">
-                <img src="images/gallery/xgor.png" alt="xgor">
-            </a>
-            <div class="caption">"Censored"</div>
-        </div>
+                    <!-- Photo 26 -->
+                    <div class="gallery-item">
+                        <a href="images/gallery/thai.jpg" target="_blank">
+                            <img src="images/gallery/thai.jpg" alt="Thai">
+                        </a>
+                        <div class="caption">My Monstera Thai Constellation in 2025</div>
+                    </div>
 
-                <!-- Photo 26 -->
-        <div class="gallery-item">
-            <a href="images/gallery/thai.jpg" target="_blank">
-                <img src="images/gallery/thai.jpg" alt="Thai">
-            </a>
-            <div class="caption">My Monstera Thai Constellation in 2025</div>
-        </div>
-   
-        <!-- Duplicate <div class="gallery-item">...</div> for as many photos as you want! -->
-
-    </div>
-</main>
+                </div>
+            </main>
             
             <!-- Side Log Panel -->
             <aside id="leftSidebar">
@@ -466,7 +484,14 @@
                     <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Moving away from Google Sites limits to full code customization on GitHub Pages!</p>
                 </div>
 
-                <h2>Connect</h2>
+                <!-- Games Landing Page Icon Button -->
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
                 <ul style="padding-left: 20px; line-height: 1.8;">
                     <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
                     <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
