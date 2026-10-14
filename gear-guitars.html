@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheirou - Gear Detail</title>
+    <title>Cheirou - Gear / Pedals</title>
     
     <!-- Custom Tab Icon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -143,29 +143,88 @@
             background: rgba(5, 3, 10, 0.7);
         }
 
-        /* --- GEAR DETAIL STYLING --- */
-        .gear-detail-box {
+        /* --- SCROLLABLE GEAR LIST CONTAINER --- */
+        .scrollable-gear-list {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+            border: 1px solid var(--border-color);
+            background: rgba(5, 3, 10, 0.5);
+            padding: 10px;
+        }
+
+        .scrollable-gear-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollable-gear-list::-webkit-scrollbar-track {
+            background: #05030A;
+        }
+        .scrollable-gear-list::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border: 1px solid var(--link-color);
+        }
+
+        /* --- DROPDOWN GEAR BOXES --- */
+        details {
+            background: rgba(5, 3, 10, 0.85);
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+            transition: border-color 0.2s ease;
+        }
+
+        details[open] {
+            border-color: var(--link-color);
+            box-shadow: 0 0 8px rgba(168, 192, 216, 0.15);
+        }
+
+        summary {
+            padding: 12px 15px;
+            cursor: pointer;
+            user-select: none;
+            background: rgba(20, 13, 31, 0.85);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(30, 20, 45, 0.9);
+        }
+
+        summary:hover h2 {
+            color: var(--link-hover);
+        }
+
+        /* Turns title neon blue when opened */
+        details[open] summary h2 {
+            color: var(--link-hover);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+        }
+
+        .gear-dropdown-content {
+            padding: 15px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            background: rgba(5, 3, 10, 0.7);
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            background: rgba(5, 3, 10, 0.75);
-            border: 1px solid var(--border-color);
-            padding: 15px;
+            gap: 12px;
         }
 
         .gear-img-container {
             width: 100%;
-            max-height: 300px;
+            max-height: 200px;
             overflow: hidden;
             border: 1px solid var(--border-color);
             background: #0A0512;
             text-align: center;
         }
 
-        .gear-img-container img {
-            max-width: 100%;
+        .gear-thumb {
+            width: 100%;
             height: auto;
-            max-height: 280px;
+            max-height: 200px;
             object-fit: contain;
             display: block;
             margin: 0 auto;
@@ -205,12 +264,6 @@
         @media (max-width: 768px) {
             #flex { flex-direction: column; }
         }
-
-        details[open] summary h2 {
-        color: var(--link-hover);
-          text-shadow: 0 0 5px rgba(0, 255, 255, 0.4); /* Optional: adds a nice Y2K glow effect */
-        }
-        
     </style>
 </head>
 <body>
@@ -240,69 +293,263 @@
         <div id="flex">
             
             <!-- Main Content Area -->
-           <main>
-    <a href="gear.html" class="back-link">&larr; Back to Gear List</a>
-               <br>
-               <br>
+            <main>
+                <a href="gear.html" class="back-link">&larr; Back to Main Gear Index</a>
+                <h2>Electric and Acoustic Guitars</h2>
+                <p>Scroll through the inventory and click any item to expand its notes and pictures.</p>
 
-    <h2 style="margin: 0; color: #A8C0D8; display: inline-block;">Guitars</h2>
-                               <p>Click boxes for more information.</p>
-    
-    <!-- Scrollable container holding your stack of gear boxes -->
-    <div class="scrollable-gear-list">
+                <hr style="border-color: var(--border-color); margin: 20px 0;">
 
-        <!-- GEAR ITEM ENTRY -->
-        <details class="gear-detail-box">
-            <!-- The summary IS the clickable top bar -->
-            <summary>
-                <div>
-                    <h2 style="margin: 0; color: #EADEF0; display: inline-block;">Boss DS-1</h2>
-                    <p style="margin: 0; font-size: 0.85rem; color: #8A7B9B;">Guitar Pedals / Distortion</p>
-                </div>
-            </summary>
-            
-            <!-- Everything below drops down when clicked -->
-            <div class="gear-dropdown-content">
-                <hr style="border-color: var(--border-color); margin: 5px 0;">
+                <!-- Scrollable Container -->
+                <div class="scrollable-gear-list">
 
-                <div class="gear-img-container">
-                    <img src="images/gear/ds1.jpg" alt="Gear Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <div style="display:none; padding: 40px; color: var(--link-color);">[ Gear Photo Slot ]</div>
-                </div>
+                    <!-- GEAR ITEM 1: Tele-Jag-Stang -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Tele-Jag-Stang</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/tele-jag-stang.jpg" alt="Tele-Jag-Stang Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
 
-                <div style="font-size: 0.9rem; line-height: 1.6;">
-                    <p>Modified for extra low-end crunch. Used heavily on rhythm guitar tracks for the grimy distortion layers.</p>
-                </div>
-            </div>
-        </details>
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
 
-        <!-- ADD YOUR NEXT GEAR ITEM RIGHT DOWN HERE -->
-        <details class="gear-detail-box">
-            <summary>
-                <div>
-                    <span>Electro-Harmonix Deluxe Memory Man</span>
-                    <span style="font-size: 0.75rem; color: #8A7B9B;">[Delay]</span>
-                    <h2 style="margin: 0; display: inline-block;">Boss DS-1</h2>
-                    <p style="margin: 0; font-size: 0.85rem; color: #8A7B9B;">Guitar Pedals / Distortion</p>
-                </div>
-            </summary>
-            <div class="gear-dropdown-content">
-                <hr style="border-color: var(--border-color); margin: 5px 0;">
-                <div class="gear-img-container">
-                    <img src="images/gear/rat.jpg" alt="Gear Photo" class="gear-thumb" onerror="this.style.display='none';">
-                </div>
-                <p>Gritty distortion/fuzz hybrid.</p>
-            </div>
-        </details>
+                    <!-- GEAR ITEM 2: "Mustang" -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">"Mustang"</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/mustang.jpg" alt="Mustang Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
 
-    </div>
-</main>
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 3: Telecaster -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Telecaster</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/telecaster.jpg" alt="Telecaster Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 4: Stratocaster -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Stratocaster</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/stratocaster.jpg" alt="Stratocaster Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 5: Silvertone 1452 -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Silvertone 1452</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Electric Guitar / Danelectro-made</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/silvertone1452.jpg" alt="Silvertone 1452 Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 6: Gibson Les Paul Deluxe -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Gibson Les Paul Deluxe</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/lespauldeluxe.jpg" alt="Gibson Les Paul Deluxe Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 7: Epiphone ES-335 -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Epiphone ES-335</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Semi-Hollow Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/epiphonees335.jpg" alt="Epiphone ES-335 Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 8: Ibanez 12-string ES-335 Clone -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Ibanez 12-string ES-335 Clone</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Semi-Hollow 12-String Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/ibanez12string.jpg" alt="Ibanez 12-string Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 9: Truetone Archtop -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Truetone Archtop</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Archtop Acoustic/Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/truetonearchtop.jpg" alt="Truetone Archtop Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 10: Martin DX2-E Billy Strings -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Martin DX2-E Billy Strings</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Acoustic-Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/martindx2e.jpg" alt="Martin DX2-E Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 11: Yamaha FG300 -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Yamaha FG300</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Acoustic Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/yamahafg300.jpg" alt="Yamaha FG300 Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 12: Ovation Celebrity CC11 -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Ovation Celebrity CC11</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Acoustic-Electric Guitar</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/guitars/ovationcc11.jpg" alt="Ovation Celebrity Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+            </main>
             
             <!-- Side Log Panel -->
             <aside id="leftSidebar">
                 <h2>Updates</h2>
                 <div class="box">
-                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Studio gear archive online.</p>
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Pedal inventory scrollbox active.</p>
                 </div>
 
                 <div class="games-button-container">
@@ -327,33 +574,5 @@
 
     </div>
 
-    <!-- Optional JavaScript to dynamically populate gear details if using URL parameters -->
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const item = params.get('item');
-        
-        // Example dictionary of gear items so you only need ONE HTML file!
-        const gearDatabase = {
-            'synth1': {
-                name: 'Korg Minilogue',
-                category: 'Synthesizers / Hardware',
-                image: 'images/gear/minilogue.jpg',
-                desc: 'Polyphonic analog synthesizer used heavily for warm pads and lead melodies across the upcoming album.'
-            },
-            'pedal1': {
-                name: 'Boss DS-1',
-                category: 'Guitar Pedals / Distortion',
-                image: 'images/gear/ds1.jpg',
-                desc: 'Classic distortion pedal modified for grimy crunch and texture layering.'
-            }
-        };
-
-        if (item && gearDatabase[item]) {
-            document.getElementById('gear-title').innerText = gearDatabase[item].name;
-            document.getElementById('gear-category').innerText = gearDatabase[item].category;
-            document.getElementById('gear-image').src = gearDatabase[item].image;
-            document.getElementById('gear-description').innerHTML = `<p>${gearDatabase[item].desc}</p>`;
-        }
-    </script>
 </body>
 </html>
