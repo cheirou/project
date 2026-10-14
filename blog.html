@@ -144,22 +144,46 @@
             background: rgba(5, 3, 10, 0.7);
         }
 
-        .blog-post {
+        /* --- STYLIZED DROPDOWN BOXES --- */
+        details {
+            background: rgba(5, 3, 10, 0.75);
             border: 1px solid var(--border-color);
-            padding: 15px;
-            margin-bottom: 20px;
-            background: rgba(5, 3, 10, 0.6);
+            margin-bottom: 15px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .blog-post h3 {
-            margin-top: 0;
+        details[open] {
+            border-color: var(--link-color);
+            box-shadow: 0 0 8px rgba(168, 192, 216, 0.15);
+        }
+
+        summary {
+            padding: 12px 15px;
+            font-weight: bold;
             color: var(--link-color);
+            cursor: pointer;
+            user-select: none;
+            background: rgba(20, 13, 31, 0.85);
+            border-bottom: 1px solid transparent;
+            transition: color 0.2s ease, background 0.2s ease;
         }
 
-        .blog-date {
-            font-size: 0.8rem;
-            color: #8A7B9B;
-            margin-bottom: 10px;
+        details[open] summary {
+            border-bottom: 1px solid var(--border-color);
+            color: var(--link-hover);
+        }
+
+        summary:hover {
+            color: var(--link-hover);
+            background: rgba(30, 20, 45, 0.9);
+        }
+
+        .blog-content {
+            padding: 15px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: rgba(5, 3, 10, 0.6);
         }
 
         /* --- SIDEBAR BUTTON --- */
@@ -227,24 +251,24 @@
             
             <!-- Main Content Area -->
             <main>
-                               <h2>Log Entries</h2>
-                <p>Click on any date to open and read the post.</p>
+                <h2>Log Entries</h2>
+                <p>Click on any date box to drop down and read the post.</p>
 
-                <hr style="border-color: var(--link-color); margin: 20px 0;">
+                <hr style="border-color: var(--border-color); margin: 20px 0;">
 
-                                <!-- Entry: 10/13/2026 -->
+                <!-- Entry: 10/13/2026 -->
                 <details>
                     <summary>10/13/2026</summary>
                     <div class="blog-content">
-                       Okay, I've spent the last couple days remaking the site in actual html/css.  It's not professional, but I'm much much more satisfied with the control and aesthetic.  I've also made decent progress on the album art for my upcoming album.  Web development is a little monotonous for me, so I'll call it here.  Thanks!
+                        Okay, I've spent the last couple days remaking the site in actual html/css. It's not professional, but I'm much much more satisfied with the control and aesthetic. I've also made decent progress on the album art for my upcoming album. Web development is a little monotonous for me, so I'll call it here. Thanks!
                     </div>
                 </details>
 
-                <!-- Entry: 10/11/2026  -->
+                <!-- Entry: 10/11/2026 -->
                 <details>
                     <summary>10/11/2026</summary>
                     <div class="blog-content">
-                        I haven't actually done anything involving web design yet today, I'm just adding another entry because it feels nice to do. I like seeing the little dropdown bars all in a row. I'm definitely throwing a lot on my plate music-wise right now. I have proper music distribution in the pipeline, as well as plans to promote the release with a music video. Also, the site naturally, and some less pressing things to consider such as CDs. I want to see if I can go about creating pop-up windows through the embedding function here. I'm tired and it's not even due to physical exaustion. With some personal challenges to overcome, my capacity to keep my cool is not at its best. I'm fortunate to have the ability to play music, which lets me get some of this turmoil settled down.
+                        I haven't actually done anything involving web design yet today, I'm just adding another entry because it feels nice to do. I like seeing the little dropdown bars all in a row. I'm definitely throwing a lot on my plate music-wise right now. I have proper music distribution in the pipeline, as well as plans to promote the release with a music video. Also, the site naturally, and some less pressing things to consider such as CDs. I want to see if I can go about creating pop-up windows through the embedding function here. I'm tired and it's not even due to physical exhaustion. With some personal challenges to overcome, my capacity to keep my cool is not at its best. I'm fortunate to have the ability to play music, which lets me get some of this turmoil settled down.
                     </div>
                 </details>
 
@@ -263,7 +287,6 @@
                         I just started working on this website. Not sure if this will even become something worth using. My attention shifts around erratically, so we are yet to see if I'll stick with this. I may just end up making something from scratch, but for now, my html and css is too rusty for that. Is this going to be readable in the future? Who knows? Thank you!
                     </div>
                 </details>
-
 
             </main>
             
