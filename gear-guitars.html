@@ -234,52 +234,56 @@
         <div id="flex">
             
             <!-- Main Content Area -->
-            <main>
-                <a href="gear.html" class="back-link">&larr; Back to Gear List</a>
-                
-                <div class="gear-detail-box">
-                    <!-- Dynamic Title (Optional JS updates this based on URL, or you just type it in) -->
-                    <h2 id="gear-title" style="margin: 0; color: var(--link-hover);">Gear Item Name</h2>
-                    <p id="gear-category" style="margin: 0; font-size: 0.85rem; color: #8A7B9B;">Category / Brand</p>
-                    
-                    <hr style="border-color: var(--border-color); margin: 5px 0;">
-
-                    <div class="gear-img-container">
-                        <img id="gear-image" src="images/gear/placeholder.jpg" alt="Gear Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none; padding: 40px; color: var(--link-color);">[ Gear Photo Slot ]</div>
-                    </div>
-
-                    <div id="gear-description" style="font-size: 0.9rem; line-height: 1.6;">
-                        <p>Write your detailed notes, specs, signal chain placement, or thoughts on this piece of equipment here.</p>
-                    </div>
-
-<details>
+           <main>
+    <a href="gear.html" class="back-link">&larr; Back to Gear List</a>
     
-    <!-- This part stays visible all the time and acts as the clickable bar -->
-    <div class="gear-detail-box">
-                    <!-- Dynamic Title (Optional JS updates this based on URL, or you just type it in) -->
-                    <h2 id="gear-title" style="margin: 0; color: var(--link-hover);">Gear Item Name</h2>
-                    <p id="gear-category" style="margin: 0; font-size: 0.85rem; color: #8A7B9B;">Category / Brand</p>
+    <!-- Scrollable container holding your stack of gear boxes -->
+    <div class="scrollable-gear-list">
 
-    <!-- This part drops down when clicked -->
-    <div class="gear-dropdown-content">
- <summary>
-               
-                    
-                    <hr style="border-color: var(--border-color); margin: 5px 0;">
-
-                    <div class="gear-img-container">
-                        <img id="gear-image" src="images/gear/placeholder.jpg" alt="Gear Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none; padding: 40px; color: var(--link-color);">[ Gear Photo Slot ]</div>
-                    </div>
-    </summary>
-        <p>Write your detailed notes, specs, or thoughts here!</p>
-    </div>
-</details>
-                    
+        <!-- GEAR ITEM ENTRY -->
+        <details class="gear-detail-box">
+            <!-- The summary IS the clickable top bar -->
+            <summary>
+                <div>
+                    <h2 style="margin: 0; color: var(--link-hover); display: inline-block;">Boss DS-1</h2>
+                    <p style="margin: 0; font-size: 0.85rem; color: #8A7B9B;">Guitar Pedals / Distortion</p>
                 </div>
-                
-            </main>
+            </summary>
+            
+            <!-- Everything below drops down when clicked -->
+            <div class="gear-dropdown-content">
+                <hr style="border-color: var(--border-color); margin: 5px 0;">
+
+                <div class="gear-img-container">
+                    <img src="images/gear/ds1.jpg" alt="Gear Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div style="display:none; padding: 40px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                </div>
+
+                <div style="font-size: 0.9rem; line-height: 1.6;">
+                    <p>Modified for extra low-end crunch. Used heavily on rhythm guitar tracks for the grimy distortion layers.</p>
+                </div>
+            </div>
+        </details>
+
+        <!-- ADD YOUR NEXT GEAR ITEM RIGHT DOWN HERE -->
+        <details class="gear-detail-box">
+            <summary>
+                <div>
+                    <h2 style="margin: 0; color: var(--link-hover); display: inline-block;">ProCo RAT 2</h2>
+                    <p style="margin: 0; font-size: 0.85rem; color: #8A7B9B;">Guitar Pedals / Distortion</p>
+                </div>
+            </summary>
+            <div class="gear-dropdown-content">
+                <hr style="border-color: var(--border-color); margin: 5px 0;">
+                <div class="gear-img-container">
+                    <img src="images/gear/rat.jpg" alt="Gear Photo" class="gear-thumb" onerror="this.style.display='none';">
+                </div>
+                <p>Gritty distortion/fuzz hybrid.</p>
+            </div>
+        </details>
+
+    </div>
+</main>
             
             <!-- Side Log Panel -->
             <aside id="leftSidebar">
