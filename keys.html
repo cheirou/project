@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheirou - Gear / Keys</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <style>
+        /* Y2K Grimy & Glitchy Dark Palette Variables */
+        :root {
+            --header-image: url('images/HeaderMaybe.jpg');
+            --body-bg-image: url('images/Body.jpg');
+            --footer-bg-image: url('images/Footer (1).jpg');
+            
+            --body-bg: #05030A;
+            --content-bg: rgba(12, 7, 18, 0.90);
+            --panel-bg: #140D1F;
+            --border-color: #2D1A3B;
+            --text-color: #EADEF0;
+            
+            --link-color: #A8C0D8;
+            --link-hover: #00FFFF;
+        }
+
+        @font-face {
+            font-family: Nunito;
+            src: url('https://neocities.org');
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            background-image: var(--body-bg-image);
+            background-repeat: repeat;
+            background-size: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--content-bg);
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        #container a {
+            color: var(--link-color);
+            font-weight: bold;
+        }
+
+        #header {
+            width: 100%;
+            height: 150px;
+            background-color: #140D1F;
+            background-image: var(--header-image);
+            background-size: cover;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #header img.logo {
+            max-height: 80%;
+            max-width: 90%;
+            height: auto;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000) drop-shadow(-1px -1px 0px #2D1A3B);
+        }
+
+        #navbar {
+            background-color: var(--panel-bg);
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        #navbar ul {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        #navbar li {
+            padding: 10px 0;
+        }
+
+        #navbar li a {
+            color: var(--link-color);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        #navbar li a:hover {
+            color: var(--link-hover);
+            text-shadow: 0 0 5px var(--link-hover);
+            text-decoration: underline;
+        }
+
+        #flex {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 15px;
+        }
+
+        main {
+            flex: 3;
+            background-color: rgba(20, 13, 31, 0.65);
+            padding: 20px;
+            border: 1px dashed var(--border-color);
+        }
+
+        aside {
+            flex: 1;
+            background-color: var(--panel-bg);
+            padding: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .box {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-top: 10px;
+            background: rgba(5, 3, 10, 0.7);
+        }
+
+        /* --- SCROLLABLE GEAR LIST CONTAINER --- */
+        .scrollable-gear-list {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+            border: 1px solid var(--border-color);
+            background: rgba(5, 3, 10, 0.5);
+            padding: 10px;
+        }
+
+        .scrollable-gear-list::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollable-gear-list::-webkit-scrollbar-track {
+            background: #05030A;
+        }
+        .scrollable-gear-list::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border: 1px solid var(--link-color);
+        }
+
+        /* --- DROPDOWN GEAR BOXES --- */
+        details {
+            background: rgba(5, 3, 10, 0.85);
+            border: 1px solid var(--border-color);
+            margin-bottom: 12px;
+            transition: border-color 0.2s ease;
+        }
+
+        details[open] {
+            border-color: var(--link-color);
+            box-shadow: 0 0 8px rgba(168, 192, 216, 0.15);
+        }
+
+        summary {
+            padding: 12px 15px;
+            cursor: pointer;
+            user-select: none;
+            background: rgba(20, 13, 31, 0.85);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(30, 20, 45, 0.9);
+        }
+
+        summary:hover h2 {
+            color: var(--link-hover);
+        }
+
+        /* Turns title neon blue when opened */
+        details[open] summary h2 {
+            color: var(--link-hover);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+        }
+
+        .gear-dropdown-content {
+            padding: 15px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            background: rgba(5, 3, 10, 0.7);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .gear-img-container {
+            width: 100%;
+            max-height: 200px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: #0A0512;
+            text-align: center;
+        }
+
+        .gear-thumb {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            padding: 25px 10px;
+            background-image: var(--footer-bg-image);
+            background-size: cover;
+            background-position: left center;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            #flex { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        
+        <!-- Header -->
+        <div id="header">
+            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
+        </div>
+        
+        <!-- Navigation Menu -->
+        <div id="headerArea">
+            <nav id="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="gear.html" style="text-decoration: underline; color: var(--text-color);">Gear</a></li>
+                    <li><a href="bandcamp.html">Bandcamp/Merch</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="friends.html">Friends</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="flex">
+            
+            <!-- Main Content Area -->
+            <main>
+                <a href="gear.html" class="back-link">&larr; Back to Main Gear Index</a>
+                <h2>Keyboards, Accordions, and Synthesizers</h2>
+                <p>Scroll through the inventory and click any item to expand its notes and pictures.</p>
+
+                <hr style="border-color: var(--border-color); margin: 20px 0;">
+
+                <!-- Scrollable Container -->
+                <div class="scrollable-gear-list">
+
+
+<             !-- GEAR ITEM 1: Casio CTS-1 -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Casio CTS-1</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Portable Keyboard / Synthesizer</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/keys/casio-cts1.jpg" alt="Casio CTS-1 Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 2: Yamaha Reface YC -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Yamaha Reface YC</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Combo Organ Synthesizer</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/keys/yamaha-reface-yc.jpg" alt="Yamaha Reface YC Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 3: Casio CDP-230R -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Casio CDP-230R</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Digital Piano / Workstation</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/keys/casio-cdp230r.jpg" alt="Casio CDP-230R Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 4: Casiotone CT-380 -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Casiotone CT-380</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Vintage PCM Keyboard</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/keys/casiotone-ct380.jpg" alt="Casiotone CT-380 Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 5: Lowrey Quickstart -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Lowrey Quickstart</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Home Console Organ</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/keys/lowrey-quickstart.jpg" alt="Lowrey Quickstart Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 6: M-Audio Oxygen Pro Mini -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">M-Audio Oxygen Pro Mini</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">USB MIDI Keyboard Controller</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/keys/maudio-oxygen-pro-mini.jpg" alt="M-Audio Oxygen Pro Mini Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 7: Monarch Accordion -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Monarch Accordion</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Piano Accordion</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/accordions/monarch-accordion.jpg" alt="Monarch Accordion Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 8: Noble Accordion -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Noble Accordion</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Piano Accordion</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/accordions/noble-accordion.jpg" alt="Noble Accordion Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+
+                    <!-- GEAR ITEM 9: Carbonari & Sons C System Button Accordion -->
+                    <details>
+                        <summary>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Carbonari & Sons C System Button Accordion</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">C-System Chromatic Button Accordion</p>
+                            </div>
+                        </summary>
+                        <div class="gear-dropdown-content">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/accordions/carbonari-c-system.jpg" alt="Carbonari & Sons Accordion Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
+                            <p><strong>Notes:</strong> </p>
+                        </div>
+                    </details>
+                  
+            </main>
+            
+            <!-- Side Log Panel -->
+            <aside id="leftSidebar">
+                <h2>Updates</h2>
+                <div class="box">
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Pedal inventory scrollbox active.</p>
+                </div>
+
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
+                    <li><a href="https://cheirou.bandcamp.com/" target="_blank">Bandcamp</a></li>
+                </ul>
+            </aside>
+
+        </div>
+        
+        <footer>
+            <p>copy wright &copy; 2026 Cheirou.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
