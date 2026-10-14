@@ -205,6 +205,12 @@
         @media (max-width: 768px) {
             #flex { flex-direction: column; }
         }
+
+        details[open] summary h2 {
+        color: var(--link-hover);
+          text-shadow: 0 0 5px rgba(0, 255, 255, 0.4); /* Optional: adds a nice Y2K glow effect */
+        }
+        
     </style>
 </head>
 <body>
@@ -272,7 +278,7 @@
         <details class="gear-detail-box">
             <summary>
                 <div>
-                    <h2 style="margin: 0; color: var(--link-hover); display: inline-block;">ProCo RAT 2</h2>
+                    <h2 style="margin: 0; display: inline-block;">Boss DS-1</h2>
                     <p style="margin: 0; font-size: 0.85rem; color: #8A7B9B;">Guitar Pedals / Distortion</p>
                 </div>
             </summary>
