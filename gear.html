@@ -1,10 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheirou - Gear</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
     <style>
         /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
@@ -33,7 +36,7 @@
             background-color: var(--body-bg);
             color: var(--text-color);
             background-image: var(--body-bg-image);
-            background-repeat: repeat; /* Tiles the texture across the background */
+            background-repeat: repeat;
             background-size: auto;
         }
 
@@ -44,9 +47,9 @@
         #container {
             max-width: 900px;
             margin: 20px auto;
-            background-color: var(--content-bg); /* Seamless grimy content area */
+            background-color: var(--content-bg);
             padding: 15px;
-            border: 2px solid var(--border-color); /* Grimy border */
+            border: 2px solid var(--border-color);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
@@ -61,8 +64,8 @@
             height: 150px;
             background-color: #140D1F;
             background-image: var(--header-image);
-            background-size: cover;          /* Scales image to cover the header box */
-            background-position: bottom center; /* Anchors the image to the bottom */
+            background-size: cover;
+            background-position: bottom center;
             background-repeat: no-repeat;
             border-bottom: 2px solid var(--border-color);
             display: flex;
@@ -109,14 +112,14 @@
         }
 
         #navbar li a:hover {
-            color: var(--link-hover); /* Sudden cyan hover for a retro digital glitch feel */
+            color: var(--link-hover);
             text-shadow: 0 0 5px var(--link-hover);
             text-decoration: underline;
         }
 
         #flex {
             display: flex;
-            flex-direction: row-reverse; /* Keeps sidebar on the left, main content on right */
+            flex-direction: row-reverse;
             gap: 15px;
         }
 
@@ -141,12 +144,49 @@
             background: rgba(5, 3, 10, 0.7);
         }
 
-        .embed-container {
+        /* --- CATEGORY LINKS GRID --- */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 10px;
             margin: 15px 0;
-            border: 1px dashed var(--border-color);
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .category-card {
+            background: rgba(5, 3, 10, 0.85);
+            border: 1px solid var(--border-color);
+            padding: 12px 8px;
             text-align: center;
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: bold;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+            display: block;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--link-hover);
+            color: var(--link-hover);
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.25);
+        }
+
+        /* --- SIDEBAR BUTTON --- */
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        .games-button-container a:hover {
+            filter: drop-shadow(0 0 6px var(--link-hover));
         }
 
         footer {
@@ -155,15 +195,12 @@
             font-size: 0.8rem;
             border-top: 1px solid var(--border-color);
             padding: 25px 10px;
-            
-            /* Footer Texture Settings */
             background-image: var(--footer-bg-image);
-            background-size: cover;        /* Stretches the image to cover the entire footer width */
-            background-position: left center; /* Keeps the light glow anchored to the left */
+            background-size: cover;
+            background-position: left center;
             background-repeat: no-repeat;
         }
 
-        /* Responsive design for mobile screens */
         @media (max-width: 768px) {
             #flex {
                 flex-direction: column;
@@ -180,7 +217,7 @@
             <img src="images/logo.png" alt="Cheirou Logo" class="logo">
         </div>
         
-        <!-- Navigation Menu Grid -->
+        <!-- Navigation Menu -->
         <div id="headerArea">
             <nav id="navbar">
                 <ul>
@@ -199,13 +236,22 @@
             
             <!-- Main Content Area -->
             <main>
-                <h2>Gear</h2>
-                <p>Instruments, hardware, software, and tools used for production.</p>
+                <h2>Gear & Studio Rig</h2>
+                <p>Instruments, amplifiers, signal processors, and recording hardware.</p>
                 
-                <hr style="border-color: var(--link-color); margin: 20px 0;">
+                <hr style="border-color: var(--border-color); margin: 20px 0;">
 
-                <div class="box">
-                    <p style="font-size: 0.9rem;"><em>Gear list coming soon...</em></p>
+                <!-- Category Sub-Navigation -->
+                <h3>Browse Categories:</h3>
+                <div class="category-grid">
+                    <a href="guitar.html" class="category-card">Guitars</a>
+                    <a href="amps.html" class="category-card">Amps</a>
+                    <a href="keys.html" class="category-card">Key Instruments</a>
+                    <a href="pedals.html" class="category-card">Pedals</a>
+                </div>
+
+                <div class="box" style="margin-top: 20px;">
+                    <p style="margin: 0; font-size: 0.9rem;">Select a category above to view detailed equipment specs, signal chains, and sound demos.</p>
                 </div>
             </main>
             
@@ -213,10 +259,17 @@
             <aside id="leftSidebar">
                 <h2>Updates</h2>
                 <div class="box">
-                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Moving away from Google Sites limits to full code customization on GitHub Pages!</p>
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Gear category archives initialized!</p>
                 </div>
 
-                <h2>Connect</h2>
+                <!-- Games Landing Page Icon Button -->
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
                 <ul style="padding-left: 20px; line-height: 1.8;">
                     <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
                     <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
