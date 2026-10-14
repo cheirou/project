@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheirou - 3D Tech Demo</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        /* Y2K Grimy & Glitchy Dark Palette Variables */
+        :root {
+            --header-image: url('images/HeaderMaybe.jpg');
+            --body-bg-image: url('images/Body.jpg');
+            --footer-bg-image: url('images/Footer (1).jpg');
+            
+            --body-bg: #05030A;
+            --content-bg: rgba(12, 7, 18, 0.90);
+            --panel-bg: #140D1F;
+            --border-color: #2D1A3B;
+            --text-color: #EADEF0;
+            
+            --link-color: #A8C0D8;
+            --link-hover: #00FFFF;
+        }
+
+        @font-face {
+            font-family: Nunito;
+            src: url('https://neocities.org');
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            background-image: var(--body-bg-image);
+            background-repeat: repeat;
+            background-size: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--content-bg);
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        #header {
+            width: 100%;
+            height: 150px;
+            background-color: #140D1F;
+            background-image: var(--header-image);
+            background-size: cover;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #header img.logo {
+            max-height: 80%;
+            max-width: 90%;
+            height: auto;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000) drop-shadow(-1px -1px 0px #2D1A3B);
+        }
+
+        #navbar {
+            background-color: var(--panel-bg);
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        #navbar ul {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        #navbar li {
+            padding: 10px 0;
+        }
+
+        #navbar li a {
+            color: var(--link-color);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        #navbar li a:hover {
+            color: var(--link-hover);
+            text-shadow: 0 0 5px var(--link-hover);
+            text-decoration: underline;
+        }
+
+        #flex {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 15px;
+        }
+
+        main {
+            flex: 3;
+            background-color: rgba(20, 13, 31, 0.65);
+            padding: 20px;
+            border: 1px dashed var(--border-color);
+            text-align: center;
+        }
+
+        aside {
+            flex: 1;
+            background-color: var(--panel-bg);
+            padding: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .box {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-top: 10px;
+            background: rgba(5, 3, 10, 0.7);
+        }
+
+        /* --- PS1 CANVAS STYLING --- */
+        .viewport-wrapper {
+            position: relative;
+            margin: 15px auto;
+            width: 100%;
+            max-width: 512px;
+            aspect-ratio: 4 / 3;
+            border: 2px solid var(--border-color);
+            background: #000;
+            box-shadow: 0 0 15px rgba(0,0,0,0.9);
+            overflow: hidden;
+        }
+
+        canvas#webgl-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            /* Forces pixelation for retro 32-bit rendering */
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+
+        .controls-hint {
+            font-size: 0.8rem;
+            color: var(--link-color);
+            margin-top: 8px;
+        }
+
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            padding: 25px 10px;
+            background-image: var(--footer-bg-image);
+            background-size: cover;
+            background-position: left center;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            #flex { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        
+        <!-- Header -->
+        <div id="header">
+            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
+        </div>
+        
+        <!-- Navbar -->
+        <div id="headerArea">
+            <nav id="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="gear.html">Gear</a></li>
+                    <li><a href="bandcamp.html">Bandcamp/Merch</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="friends.html">Friends</a></li>
+                    <li><a href="games.html" style="text-decoration: underline; color: var(--text-color);">Games</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="flex">
+            
+            <!-- Main Content Area -->
+            <main>
+                <h2>3D PSX Engine Test</h2>
+                <p>32-Bit Low-Poly WebGL Demo rendered at low internal resolution.</p>
+                
+                <hr style="border-color: var(--border-color); margin: 15px 0;">
+
+                <div class="viewport-wrapper">
+                    <canvas id="webgl-canvas"></canvas>
+                </div>
+
+                <div class="controls-hint">
+                    <p style="margin:0;"><strong>Controls:</strong> Click & Drag inside screen to rotate the camera!</p>
+                </div>
+            </main>
+            
+            <!-- Sidebar -->
+            <aside id="leftSidebar">
+                <h2>Updates</h2>
+                <div class="box">
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Three.js PS1 3D renderer initialized!</p>
+                </div>
+
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
+                    <li><a href="https://cheirou.bandcamp.com/" target="_blank">Bandcamp</a></li>
+                </ul>
+            </aside>
+
+        </div>
+        
+        <footer>
+            <p>copy wright &copy; 2026 Cheirou.</p>
+        </footer>
+
+    </div>
+
+    <!-- 3D RETRO SCENE SCRIPT -->
+    <script>
+        const canvas = document.getElementById('webgl-canvas');
+        
+        // Locked low internal resolution for 32-bit pixelated rendering (320x240)
+        const RENDER_WIDTH = 320;
+        const RENDER_HEIGHT = 240;
+
+        // Scene setup
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x05030a);
+        scene.fog = new THREE.FogExp2(0x05030a, 0.15);
+
+        // Camera setup
+        const camera = new THREE.PerspectiveCamera(60, RENDER_WIDTH / RENDER_HEIGHT, 0.1, 100);
+        camera.position.set(0, 1.2, 3.5);
+
+        // WebGL Renderer
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false });
+        renderer.setSize(RENDER_WIDTH, RENDER_HEIGHT, false); // Keep buffer 320x240
+
+        // --- MESH CREATION ---
+        
+        // 1. Central Floating Low-Poly Diamond (Flat Shaded for PS1 look)
+        const diamondGeo = new THREE.OctahedronGeometry(0.8, 0);
+        const diamondMat = new THREE.MeshPhongMaterial({
+            color: 0x00ffff,
+            emissive: 0x140d1f,
+            flatShading: true,
+            shininess: 30
+        });
+        const diamond = new THREE.Mesh(diamondGeo, diamondMat);
+        diamond.position.y = 1.0;
+        scene.add(diamond);
+
+        // 2. Low-Poly Grid Floor
+        const floorGeo = new THREE.PlaneGeometry(12, 12, 12, 12);
+        const floorMat = new THREE.MeshPhongMaterial({
+            color: 0x2d1a3b,
+            wireframe: true
+        });
+        const floor = new THREE.Mesh(floorGeo, floorMat);
+        floor.rotation.x = -Math.PI / 2;
+        scene.add(floor);
+
+        // 3. Ambient & Point Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 1.5);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0x00ffff, 2, 8);
+        pointLight.position.set(0, 2, 2);
+        scene.add(pointLight);
+
+        const magentaLight = new THREE.PointLight(0xa8c0d8, 1.5, 8);
+        magentaLight.position.set(-2, 0.5, -2);
+        scene.add(magentaLight);
+
+        // --- INTERACTIVE MOUSE DRAG ROTATION ---
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+
+        canvas.addEventListener('mousedown', (e) => { isDragging = true; });
+        window.addEventListener('mouseup', () => { isDragging = false; });
+        
+        canvas.addEventListener('mousemove', (e) => {
+            let deltaMove = {
+                x: e.clientX - previousMousePosition.x,
+                y: e.clientY - previousMousePosition.y
+            };
+
+            if (isDragging) {
+                scene.rotation.y += deltaMove.x * 0.01;
+                scene.rotation.x += deltaMove.y * 0.01;
+            }
+
+            previousMousePosition = { x: e.clientX, y: e.clientY };
+        });
+
+        // --- ANIMATION LOOP ---
+        let clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            let elapsedTime = clock.getElapsedTime();
+
+            // Bobbing and spinning animation
+            diamond.rotation.y += 0.015;
+            diamond.position.y = 1.0 + Math.sin(elapsedTime * 2) * 0.15;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
