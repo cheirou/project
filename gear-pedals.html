@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Just Copy & Paste: Whenever you get a new piece of gear, you just copy a <details> block inside the scrollable list, change the title, image path, and description text. -->
-
-<!-- Keeps Pages Clean: The scroll container (.scrollable-gear-list) keeps long lists compact no matter how many pedals or items you add. -->
-    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -158,7 +153,6 @@
             padding: 10px;
         }
 
-        /* Custom scrollbar for Y2K look */
         .scrollable-gear-list::-webkit-scrollbar {
             width: 8px;
         }
@@ -185,8 +179,6 @@
 
         summary {
             padding: 12px 15px;
-            font-weight: bold;
-            color: var(--link-color);
             cursor: pointer;
             user-select: none;
             background: rgba(20, 13, 31, 0.85);
@@ -197,12 +189,17 @@
 
         details[open] summary {
             border-bottom: 1px solid var(--border-color);
+            background: rgba(30, 20, 45, 0.9);
+        }
+
+        summary:hover h2 {
             color: var(--link-hover);
         }
 
-        summary:hover {
+        /* Turns title neon blue when opened */
+        details[open] summary h2 {
             color: var(--link-hover);
-            background: rgba(30, 20, 45, 0.9);
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
         }
 
         .gear-dropdown-content {
@@ -215,13 +212,22 @@
             gap: 12px;
         }
 
-        .gear-thumb {
+        .gear-img-container {
             width: 100%;
             max-height: 200px;
-            object-fit: contain;
+            overflow: hidden;
             border: 1px solid var(--border-color);
             background: #0A0512;
+            text-align: center;
+        }
+
+        .gear-thumb {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
             display: block;
+            margin: 0 auto;
         }
 
         .back-link {
@@ -288,48 +294,51 @@
             
             <!-- Main Content Area -->
             <main>
-                <a href="gear.html" class="back-link">&larr; Back to Gear List</a>
+                <a href="gear.html" class="back-link">&larr; Back to Main Gear Index</a>
                 <h2>Guitar Pedals & Effects</h2>
-                <p>Scroll through the inventory and click any item to view pictures and notes.</p>
+                <p>Scroll through the inventory and click any item to expand its notes and pictures.</p>
 
                 <hr style="border-color: var(--border-color); margin: 20px 0;">
 
                 <!-- Scrollable Container -->
                 <div class="scrollable-gear-list">
 
-                    <!-- Gear Item 1 -->
+                    <!-- GEAR ITEM 1: Boss DS-1 -->
                     <details>
                         <summary>
-                            <span>Boss DS-1 Distortion</span>
-                            <span style="font-size: 0.75rem; color: #8A7B9B;">[Pedal]</span>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">Boss DS-1 Distortion</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Main distortion / Rhythm crunch</p>
+                            </div>
                         </summary>
                         <div class="gear-dropdown-content">
-                            <img src="images/gear/ds1.jpg" alt="Boss DS-1" class="gear-thumb" onerror="this.style.display='none';">
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/gear/ds1.jpg" alt="Boss DS-1 Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
+
                             <p><strong>Notes:</strong> Modified for extra low-end crunch. Used heavily on rhythm guitar tracks for the grimy distortion layers.</p>
-                            <p style="font-size: 0.8rem; color: #8A7B9B; margin: 0;">Settings: Tone @ 11 o'clock, Distortion @ max.</p>
                         </div>
                     </details>
 
-                    <!-- Gear Item 2 -->
+                    <!-- GEAR ITEM 2: ProCo RAT 2 -->
                     <details>
                         <summary>
-                            <span>Electro-Harmonix Deluxe Memory Man</span>
-                            <span style="font-size: 0.75rem; color: #8A7B9B;">[Delay]</span>
+                            <div>
+                                <h2 style="margin: 0; font-size: 1.1rem; color: var(--link-color);">ProCo RAT 2</h2>
+                                <p style="margin: 0; font-size: 0.8rem; color: #8A7B9B;">Lead fuzz / High gain</p>
+                            </div>
                         </summary>
                         <div class="gear-dropdown-content">
-                            <img src="images/gear/memoryman.jpg" alt="Deluxe Memory Man" class="gear-thumb" onerror="this.style.display='none';">
-                            <p><strong>Notes:</strong> Analog bucket-brigade delay unit. Adds warm, degraded echoes that fit right into the analog noise palette.</p>
-                        </div>
-                    </details>
+                            <hr style="border-color: var(--border-color); margin: 0 0 5px 0;">
+                            
+                            <div class="gear-img-container">
+                                <img src="images/gear/rat.jpg" alt="ProCo RAT Photo" class="gear-thumb" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                <div style="display:none; padding: 30px; color: var(--link-color);">[ Gear Photo Slot ]</div>
+                            </div>
 
-                    <!-- Gear Item 3 (Template for adding more junk) -->
-                    <details>
-                        <summary>
-                            <span>ProCo RAT 2</span>
-                            <span style="font-size: 0.75rem; color: #8A7B9B;">[Distortion]</span>
-                        </summary>
-                        <div class="gear-dropdown-content">
-                            <img src="images/gear/rat.jpg" alt="ProCo RAT 2" class="gear-thumb" onerror="this.style.display='none';">
                             <p><strong>Notes:</strong> Gritty distortion/fuzz hybrid. Great for cutting through mixes with a sharp edge.</p>
                         </div>
                     </details>
