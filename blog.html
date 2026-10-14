@@ -1,10 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cheirou - Blog</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
     <style>
         /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
@@ -33,7 +36,7 @@
             background-color: var(--body-bg);
             color: var(--text-color);
             background-image: var(--body-bg-image);
-            background-repeat: repeat; /* Tiles the texture across the background */
+            background-repeat: repeat;
             background-size: auto;
         }
 
@@ -44,9 +47,9 @@
         #container {
             max-width: 900px;
             margin: 20px auto;
-            background-color: var(--content-bg); /* Seamless grimy content area */
+            background-color: var(--content-bg);
             padding: 15px;
-            border: 2px solid var(--border-color); /* Grimy border */
+            border: 2px solid var(--border-color);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
@@ -61,8 +64,8 @@
             height: 150px;
             background-color: #140D1F;
             background-image: var(--header-image);
-            background-size: cover;          /* Scales image to cover the header box */
-            background-position: bottom center; /* Anchors the image to the bottom */
+            background-size: cover;
+            background-position: bottom center;
             background-repeat: no-repeat;
             border-bottom: 2px solid var(--border-color);
             display: flex;
@@ -109,14 +112,14 @@
         }
 
         #navbar li a:hover {
-            color: var(--link-hover); /* Sudden cyan hover for a retro digital glitch feel */
+            color: var(--link-hover);
             text-shadow: 0 0 5px var(--link-hover);
             text-decoration: underline;
         }
 
         #flex {
             display: flex;
-            flex-direction: row-reverse; /* Keeps sidebar on the left, main content on right */
+            flex-direction: row-reverse;
             gap: 15px;
         }
 
@@ -141,60 +144,40 @@
             background: rgba(5, 3, 10, 0.7);
         }
 
-        /* --- Collapsible Dropdown / Accordion Styling --- */
-        details {
-            background-color: var(--panel-bg);
+        .blog-post {
             border: 1px solid var(--border-color);
-            margin-bottom: 12px;
-            border-radius: 4px;
-            overflow: hidden;
-            transition: all 0.2s ease;
-        }
-
-        details[open] {
-            background-color: rgba(12, 7, 18, 0.95);
-            border-color: var(--link-color);
-        }
-
-        summary {
-            padding: 12px 15px;
-            font-weight: bold;
-            font-size: 1.05rem;
-            color: var(--link-color);
-            cursor: pointer;
-            list-style: none; /* Removes default browser marker */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            user-select: none;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        summary:hover {
-            background-color: rgba(45, 26, 59, 0.5);
-            color: var(--link-hover);
-        }
-
-        /* Custom Dropdown Arrow */
-        summary::after {
-            content: "►";
-            font-size: 0.8rem;
-            transition: transform 0.2s ease;
-            color: var(--link-color);
-        }
-
-        details[open] summary::after {
-            transform: rotate(90deg);
-            color: var(--link-hover);
-        }
-
-        .blog-content {
             padding: 15px;
-            line-height: 1.6;
-            color: var(--text-color);
-            border-top: 1px dashed var(--border-color);
-            background: rgba(5, 3, 10, 0.5);
-            font-size: 0.95rem;
+            margin-bottom: 20px;
+            background: rgba(5, 3, 10, 0.6);
+        }
+
+        .blog-post h3 {
+            margin-top: 0;
+            color: var(--link-color);
+        }
+
+        .blog-date {
+            font-size: 0.8rem;
+            color: #8A7B9B;
+            margin-bottom: 10px;
+        }
+
+        /* --- SIDEBAR BUTTON --- */
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        .games-button-container a:hover {
+            filter: drop-shadow(0 0 6px var(--link-hover));
         }
 
         footer {
@@ -203,15 +186,12 @@
             font-size: 0.8rem;
             border-top: 1px solid var(--border-color);
             padding: 25px 10px;
-            
-            /* Footer Texture Settings */
             background-image: var(--footer-bg-image);
-            background-size: cover;        /* Stretches the image to cover the entire footer width */
-            background-position: left center; /* Keeps the light glow anchored to the left */
+            background-size: cover;
+            background-position: left center;
             background-repeat: no-repeat;
         }
 
-        /* Responsive design for mobile screens */
         @media (max-width: 768px) {
             #flex {
                 flex-direction: column;
@@ -228,7 +208,7 @@
             <img src="images/logo.png" alt="Cheirou Logo" class="logo">
         </div>
         
-        <!-- Navigation Menu Grid -->
+        <!-- Navigation Menu -->
         <div id="headerArea">
             <nav id="navbar">
                 <ul>
@@ -247,43 +227,24 @@
             
             <!-- Main Content Area -->
             <main>
-                <h2>Log Entries</h2>
-                <p>Click on any date to open and read the post.</p>
+                <h2>Blog & Web Log</h2>
+                <p>Personal notes, project updates, thoughts, and technical experiments.</p>
                 
-                <hr style="border-color: var(--link-color); margin: 20px 0;">
+                <hr style="border-color: var(--border-color); margin: 20px 0;">
 
-                                <!-- Entry: 10/13/2026 -->
-                <details>
-                    <summary>10/13/2026</summary>
-                    <div class="blog-content">
-                       Okay, I've spent the last couple days remaking the site in actual html/css.  It's not professional, but I'm much much more satisfied with the control and aesthetic.  I've also made decent progress on the album art for my upcoming album.  Web development is a little monotonous for me, so I'll call it here.  Thanks!
-                    </div>
-                </details>
-                
-                <!-- Entry: 10/11/2026  -->
-                <details>
-                    <summary>10/11/2026</summary>
-                    <div class="blog-content">
-                        I haven't actually done anything involving web design yet today, I'm just adding another entry because it feels nice to do. I like seeing the little dropdown bars all in a row. I'm definitely throwing a lot on my plate music-wise right now. I have proper music distribution in the pipeline, as well as plans to promote the release with a music video. Also, the site naturally, and some less pressing things to consider such as CDs. I want to see if I can go about creating pop-up windows through the embedding function here. I'm tired and it's not even due to physical exaustion. With some personal challenges to overcome, my capacity to keep my cool is not at its best. I'm fortunate to have the ability to play music, which lets me get some of this turmoil settled down.
-                    </div>
-                </details>
+                <!-- Blog Post Entry 1 -->
+                <article class="blog-post">
+                    <h3>Arcade Engine & Tendo Updates</h3>
+                    <div class="blog-date">Posted on: October 2026</div>
+                    <p>Added Cheirou Block and the Cheirou Tendo NES emulator directly into the site arcade! Controls are tuned with DAS/ARR logic, and accurate NTSC color tables were configured for classic 8-bit games.</p>
+                </article>
 
-                <!-- Entry: 10/10/2026 -->
-                <details>
-                    <summary>10/10/2026</summary>
-                    <div class="blog-content">
-                        I've returned to experiment with the site. Some new pages have been added, although they are mostly for testing purposes and not necessarily functioning properly yet. I had to create a bandcamp in order to actually embed it. The full page embed works quite well. No issues that I have detected. I believe this may be the slickest way to incorporate a storefront in the future. I want to ensure this site doesn't become accessible to the wrong people in my life.
-                    </div>
-                </details>
-
-                <!-- Entry: 10/9/2026 -->
-                <details>
-                    <summary>10/9/2026</summary>
-                    <div class="blog-content">
-                        I just started working on this website. Not sure if this will even become something worth using. My attention shifts around erratically, so we are yet to see if I'll stick with this. I may just end up making something from scratch, but for now, my html and css is too rusty for that. Is this going to be readable in the future? Who knows? Thank you!
-                    </div>
-                </details>
-
+                <!-- Blog Post Entry 2 -->
+                <article class="blog-post">
+                    <h3>GitHub Pages Migration</h3>
+                    <div class="blog-date">Posted on: September 2026</div>
+                    <p>Moving over to GitHub Pages to get full hand-crafted HTML/CSS control over every page layout, custom games, and responsive styling.</p>
+                </article>
 
             </main>
             
@@ -291,10 +252,17 @@
             <aside id="leftSidebar">
                 <h2>Updates</h2>
                 <div class="box">
-                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Moving away from Google Sites limits to full code customization on GitHub Pages!</p>
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Blog log section active!</p>
                 </div>
 
-                <h2>Connect</h2>
+                <!-- Games Landing Page Icon Button -->
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
                 <ul style="padding-left: 20px; line-height: 1.8;">
                     <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
                     <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
