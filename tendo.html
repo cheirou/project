@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheirou Tendo - NES Emulator</title>
+    <title>Cheirou Tendo - Emulator</title>
     
     <!-- Custom Tab Icon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -402,45 +402,70 @@
          * Licensed under the Apache License, Version 2.0
          */
 
-        // Accurate NTSC/Nestopia NES RGB Palette Map (64-color)
-        const ACCURATE_PALETTE = [
-            0x666666, 0x002A88, 0x1412A7, 0x3B00A4, 0x5C007E, 0x6E0040, 0x6C0600, 0x561D00,
-            0x333500, 0x0B4800, 0x005200, 0x004F08, 0x00404D, 0x000000, 0x000000, 0x000000,
-            0xADADAD, 0x155FD9, 0x4240FF, 0x7527FE, 0xA01ACC, 0xB71E7B, 0xB53120, 0x994E00,
-            0x6B6D00, 0x278200, 0x008A00, 0x00832B, 0x00708A, 0x000000, 0x000000, 0x000000,
-            0xFFFFFF, 0x64B0FF, 0x9290FF, 0xC676FF, 0xF26AFF, 0xFF6ECC, 0xFF8170, 0xEA9E22,
-            0xBCBE00, 0x70DB00, 0x46E423, 0x3DE173, 0x48CDDE, 0x4F4F4F, 0x000000, 0x000000,
-            0xFFFFFF, 0xC0DFFF, 0xD3D2FF, 0xE8C8FF, 0xF9C2FF, 0xFFC5E9, 0xFFCCC5, 0xF7D8A5,
-            0xE4E594, 0xC4F491, 0xB2F6AD, 0xAEF5CE, 0xB5EDF5, 0xB8B8B8, 0x000000, 0x000000
-        ];
-
         const canvas = document.getElementById('nes-screen');
         const ctx = canvas.getContext('2d');
         const imageData = ctx.createImageData(256, 240);
+        
+        // Setup direct pixel buffer access for performance and correct color mapping
+        const buf = new ArrayBuffer(imageData.data.length);
+        const buf8 = new Uint8ClampedArray(buf);
+        const data32 = new Uint32Array(buf);
 
-        for (let i = 0; i < imageData.data.length; i += 4) {
-            imageData.data[i + 3] = 255; // Alpha
+        // Web Audio API Setup for sound output
+        let audioCtx = null;
+        let scriptProcessor = null;
+        let leftSamples = [];
+        let rightSamples = [];
+
+        function initAudio() {
+            if (audioCtx) return;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 44100 });
+            scriptProcessor = audioCtx.createScriptProcessor(2048, 0, 2);
+            scriptProcessor.onaudioprocess = function(e) {
+                let outputL = e.outputBuffer.getChannelData(0);
+                let outputR = e.outputBuffer.getChannelData(1);
+                let len = outputL.length;
+
+                for (let i = 0; i < len; i++) {
+                    if (leftSamples.length > 0 && rightSamples.length > 0) {
+                        outputL[i] = leftSamples.shift();
+                        outputR[i] = rightSamples.shift();
+                    } else {
+                        outputL[i] = 0;
+                        outputR[i] = 0;
+                    }
+                }
+            };
+            scriptProcessor.connect(audioCtx.destination);
         }
 
         let nes = new jsnes.NES({
             onFrame: function(frameBuffer) {
-                for (let i = 0; i < frameBuffer.length; i++) {
-                    let pixel = frameBuffer[i];
-                    let rgb = ACCURATE_PALETTE[pixel & 0x3F] || pixel;
-
-                    let j = i * 4;
-                    imageData.data[j]     = (rgb >> 16) & 0xFF; // R
-                    imageData.data[j + 1] = (rgb >> 8) & 0xFF;  // G
-                    imageData.data[j + 2] = rgb & 0xFF;         // B
+                for (let i = 0; i < 256 * 240; i++) {
+                    data32[i] = 0xFF000000 | frameBuffer[i];
                 }
+                imageData.data.set(buf8);
                 ctx.putImageData(imageData, 0, 0);
             },
-            onAudioSample: function(left, right) {}
+            onAudioSample: function(left, right) {
+                leftSamples.push(left);
+                rightSamples.push(right);
+                // Limit buffer size to prevent audio delay buildup
+                if (leftSamples.length > 8192) {
+                    leftSamples.shift();
+                    rightSamples.shift();
+                }
+            },
+            sampleRate: 44100
         });
 
         let emulationInterval = null;
 
         function startEmulation() {
+            initAudio();
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
             if (emulationInterval) clearInterval(emulationInterval);
             emulationInterval = setInterval(() => {
                 nes.frame();
