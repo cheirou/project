@@ -148,12 +148,67 @@
             background: rgba(5, 3, 10, 0.7);
         }
 
+        /* --- GAME SELECTION GALLERY (VHS STYLE) --- */
+        .game-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .game-card {
+            background: rgba(5, 3, 10, 0.85);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            width: 180px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .game-card:hover {
+            border-color: var(--link-hover);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Vertical VHS-style rectangle cover container */
+        .game-cover-slot {
+            width: 100%;
+            aspect-ratio: 3 / 4; 
+            background: #0A0512;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .game-cover-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .game-card h3 {
+            margin: 5px 0 0 0;
+            font-size: 0.95rem;
+            color: var(--link-color);
+        }
+
+        .game-card:hover h3 {
+            color: var(--link-hover);
+        }
+
         /* --- EMULATOR UI --- */
         .emulator-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         #nes-screen {
@@ -168,11 +223,12 @@
         }
 
         .rom-selector {
-            margin-bottom: 15px;
+            margin-top: 15px;
             padding: 10px;
             background: rgba(5, 3, 10, 0.7);
             border: 1px solid var(--border-color);
             width: 100%;
+            text-align: left;
         }
 
         .rom-selector input[type="file"] {
@@ -256,17 +312,33 @@
             <!-- Main Content Area -->
             <main>
                 <h2>Cheirou Tendo</h2>
-                <p>Load an .nes ROM file to play classic 8-bit titles in browser.</p>
+                <p>Select an official free homebrew cartridge below to boot up the NES emulator.</p>
                 
                 <hr style="border-color: var(--border-color); margin: 15px 0;">
 
-                <div class="emulator-wrapper">
-                    <!-- ROM File Picker -->
-                    <div class="rom-selector">
-                        <label for="romUpload" style="display:block; margin-bottom:5px; font-size:0.85rem; color:var(--link-color);">Select .NES ROM File:</label>
-                        <input type="file" id="romUpload" accept=".nes">
+                <!-- PRIMARY FEATURE: Game Selection Library -->
+                <div class="game-grid">
+                    
+                    <!-- Game 1: Lawn Mower -->
+                    <div class="game-card" onclick="loadGameRom('roms/Lawn_Mower.nes')">
+                        <div class="game-cover-slot">
+                            <img src="images/covers/lawn-mower.jpg" alt="Lawn Mower Cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:0.75rem; color:var(--link-color); padding:10px;\'>[ Lawn Mower Cover Art ]</span>';">
+                        </div>
+                        <h3>Lawn Mower</h3>
                     </div>
 
+                    <!-- Game 2: NeSnake 2 -->
+                    <div class="game-card" onclick="loadGameRom('roms/NeSnake 2 (v1.3) (NTSC) (test).nes')">
+                        <div class="game-cover-slot">
+                            <img src="images/covers/nesnake2.jpg" alt="NeSnake 2 Cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:0.75rem; color:var(--link-color); padding:10px;\'>[ NeSnake 2 Cover Art ]</span>';">
+                        </div>
+                        <h3>NeSnake 2</h3>
+                    </div>
+
+                </div>
+
+                <!-- EMULATOR SCREEN CONTAINER -->
+                <div class="emulator-wrapper">
                     <!-- Emulator Canvas Screen -->
                     <canvas id="nes-screen" width="256" height="240"></canvas>
                 </div>
@@ -281,13 +353,23 @@
                         <li><strong>Start:</strong> Enter key</li>
                     </ul>
                 </details>
+
+                <!-- SECONDARY FEATURE: Add Your Own ROM -->
+                <details style="margin-top: 15px; border: 1px solid var(--border-color); background: rgba(5,3,10,0.5); text-align: left; padding: 5px;">
+                    <summary style="cursor: pointer; color: var(--link-color); font-size: 0.85rem; padding: 5px;">[+] Add Your Own ROM File (Secondary Feature)</summary>
+                    <div class="rom-selector">
+                        <label for="romUpload" style="display:block; margin-bottom:5px; font-size:0.8rem; color:var(--link-color);">Upload .NES ROM File from your device:</label>
+                        <input type="file" id="romUpload" accept=".nes">
+                    </div>
+                </details>
+
             </main>
             
             <!-- Sidebar -->
             <aside id="leftSidebar">
                 <h2>Updates</h2>
                 <div class="box">
-                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Cheirou Tendo NES emulator added to the arcade!</p>
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> Cheirou Tendo homebrew cartridge library active!</p>
                 </div>
 
                 <div class="games-button-container">
@@ -317,11 +399,7 @@
         /*
          * JSNES - NES Emulator in JavaScript
          * Copyright (c) 2010 Ben Firshman and contributors
-         * Licensed under the Apache License, Version 2.0 (the "License");
-         * you may not use this file except in compliance with the License.
-         * You may obtain a copy of the License at
-         * 
-         *     http://www.apache.org/licenses/LICENSE-2.0
+         * Licensed under the Apache License, Version 2.0
          */
 
         // Accurate NTSC/Nestopia NES RGB Palette Map (64-color)
@@ -348,8 +426,6 @@
             onFrame: function(frameBuffer) {
                 for (let i = 0; i < frameBuffer.length; i++) {
                     let pixel = frameBuffer[i];
-                    
-                    // Map palette index or color integer to authentic NES RGB
                     let rgb = ACCURATE_PALETTE[pixel & 0x3F] || pixel;
 
                     let j = i * 4;
@@ -371,6 +447,28 @@
             }, 1000 / 60);
         }
 
+        // Function to load game rom via server path from gallery cards
+        function loadGameRom(romUrl) {
+            fetch(romUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error("Could not fetch ROM file from path: " + romUrl);
+                    return response.arrayBuffer();
+                })
+                .then(buffer => {
+                    let binaryString = "";
+                    let bytes = new Uint8Array(buffer);
+                    for (let i = 0; i < bytes.byteLength; i++) {
+                        binaryString += String.fromCharCode(bytes[i]);
+                    }
+                    nes.loadROM(binaryString);
+                    startEmulation();
+                })
+                .catch(err => {
+                    alert("Error loading game: " + err.message + "\nMake sure the file exists in your project/roms/ folder!");
+                });
+        }
+
+        // File uploader handler for secondary feature
         document.getElementById('romUpload').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (!file) return;
