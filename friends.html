@@ -43,16 +43,21 @@
         * {
             box-sizing: border-box;
         }
-
-        #container {
+ #container {
             max-width: 900px;
             margin: 20px auto;
             background-color: var(--content-bg);
+            /* --- Add your image texture here --- */
+            background-image: url('images/friendsbg.jpg');
+            background-repeat: repeat; /* or 'cover' depending on your image */
+            background-position: center;
+            /* ----------------------------------- */
             padding: 15px;
             border: 2px solid var(--border-color);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
         }
 
+        
         #container a {
             color: var(--link-color);
             font-weight: bold;
@@ -125,10 +130,12 @@
 
         main {
             flex: 3;
-            background-color: rgba(20, 13, 31, 0.65);
+            /* Semi-transparent dark background lets the container texture show through */
+            background-color: rgba(20, 13, 31, 0.65); 
             padding: 20px;
             border: 1px dashed var(--border-color);
-        }
+            text-align: center;
+          }
 
         aside {
             flex: 1;
