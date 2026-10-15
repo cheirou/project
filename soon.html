@@ -1,1 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheirou - Coming Soon</title>
+    
+    <!-- Custom Tab Icon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
 
+    <style>
+        /* Y2K Grimy & Glitchy Dark Palette Variables */
+        :root {
+            --header-image: url('images/HeaderMaybe.jpg');
+            --body-bg-image: url('images/Body.jpg');
+            --footer-bg-image: url('images/Footer (1).jpg');
+            
+            --body-bg: #05030A;
+            --content-bg: rgba(12, 7, 18, 0.90);
+            --panel-bg: #140D1F;
+            --border-color: #2D1A3B;
+            --text-color: #EADEF0;
+            
+            --link-color: #A8C0D8;
+            --link-hover: #00FFFF;
+        }
+
+        @font-face {
+            font-family: Nunito;
+            src: url('https://neocities.org');
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+            background-image: var(--body-bg-image);
+            background-repeat: repeat;
+            background-size: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: var(--content-bg);
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        #container a {
+            color: var(--link-color);
+            font-weight: bold;
+        }
+
+        /* --- HEADER WITH LOGO IMAGE --- */
+        #header {
+            width: 100%;
+            height: 150px;
+            background-color: #140D1F;
+            background-image: var(--header-image);
+            background-size: cover;
+            background-position: bottom center;
+            background-repeat: no-repeat;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #header img.logo {
+            max-height: 80%;
+            max-width: 90%;
+            height: auto;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000) drop-shadow(-1px -1px 0px #2D1A3B);
+        }
+
+        /* --- NAVIGATION BAR --- */
+        #navbar {
+            background-color: var(--panel-bg);
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        #navbar ul {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+        }
+
+        #navbar li {
+            padding: 10px 0;
+        }
+
+        #navbar li a {
+            color: var(--link-color);
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        #navbar li a:hover {
+            color: var(--link-hover);
+            text-shadow: 0 0 5px var(--link-hover);
+            text-decoration: underline;
+        }
+
+        #flex {
+            display: flex;
+            flex-direction: row-reverse;
+            gap: 15px;
+        }
+
+        main {
+            flex: 3;
+            background-color: rgba(20, 13, 31, 0.65);
+            padding: 20px;
+            border: 1px dashed var(--border-color);
+            text-align: center;
+        }
+
+        aside {
+            flex: 1;
+            background-color: var(--panel-bg);
+            padding: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .box {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            margin-top: 10px;
+            background: rgba(5, 3, 10, 0.7);
+        }
+
+        /* --- COMING SOON CARD STYLING --- */
+        .coming-soon-card {
+            border: 1px solid var(--border-color);
+            background: rgba(5, 3, 10, 0.85);
+            padding: 30px 15px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .coming-soon-card h1 {
+            color: var(--link-hover);
+            font-size: 1.8rem;
+            margin-top: 0;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+            letter-spacing: 1px;
+        }
+
+        .games-button-container {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .games-button-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(2px 2px 0px #000);
+        }
+
+        footer {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            padding: 25px 10px;
+            background-image: var(--footer-bg-image);
+            background-size: cover;
+            background-position: left center;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            #flex { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        
+        <!-- Header -->
+        <div id="header">
+            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
+        </div>
+        
+        <!-- Navigation Bar -->
+        <div id="headerArea">
+            <nav id="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="gear.html">Gear</a></li>
+                    <li><a href="bandcamp.html">Bandcamp/Merch</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="friends.html">Friends</a></li>
+                    <li><a href="games.html">Games</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="flex">
+            
+            <!-- Main Content Area -->
+            <main>
+                <div class="coming-soon-card">
+                    <h1>[ PAGE UNDER CONSTRUCTION ]</h1>
+                    <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-color);">
+                        This section is currently being updated and constructed.
+                    </p>
+                    <p style="font-size: 0.85rem; color: #8A7B9B; margin-top: 15px;">
+                        Check back soon for new content, media, and updates.
+                    </p>
+                    <hr style="border-color: var(--border-color); margin: 20px auto; width: 60%;">
+                    <a href="index.html" style="font-size: 0.9rem;">&larr; Return to Homepage</a>
+                </div>
+            </main>
+            
+            <!-- Sidebar -->
+            <aside id="leftSidebar">
+                <h2>Updates</h2>
+                <div class="box">
+                    <p style="font-size: 0.85rem; margin: 0;"><strong>System Update:</strong> New section currently in development.</p>
+                </div>
+
+                <div class="games-button-container">
+                    <a href="games.html" title="Cheirou Games Landing Page">
+                        <img src="images/gamesicon.png" alt="Games">
+                    </a>
+                </div>
+
+                <h2>Socials</h2>
+                <ul style="padding-left: 20px; line-height: 1.8;">
+                    <li><a href="https://www.tiktok.com/@cheirouproject" target="_blank">TikTok</a></li>
+                    <li><a href="https://www.youtube.com/@CheirouProject" target="_blank">YouTube</a></li>
+                    <li><a href="https://cheirou.bandcamp.com/" target="_blank">Bandcamp</a></li>
+                </ul>
+            </aside>
+
+        </div>
+        
+        <footer>
+            <p>copy wright &copy; 2026 Cheirou.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
