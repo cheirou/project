@@ -351,14 +351,14 @@ form.addEventListener('submit', async (e) => {
         const data = await response.json();
 
         if (response.ok) {
-            alert("Success! You're on the list.");
+            alert("You wont regret this");
             form.reset();
         } else {
             alert("Error: " + data.message);
         }
 
     } catch (error) {
-        alert("Something went wrong. Please try again.");
+        alert("Something went wrong. Please try harder");
     } finally {
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
