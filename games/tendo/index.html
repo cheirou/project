@@ -6,7 +6,7 @@
     <title>Cheirou Tendo - Emulator</title>
     
     <!-- Custom Tab Icon -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
 
     <!-- JSNES Emulator CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsnes/2.1.0/jsnes.min.js"></script>
@@ -14,9 +14,9 @@
     <style>
         /* Y2K Grimy & Glitchy Dark Palette Variables */
         :root {
-            --header-image: url('images/HeaderMaybe.jpg');
-            --body-bg-image: url('images/Body.jpg');
-            --footer-bg-image: url('images/Footer (1).jpg');
+            --header-image: url('/images/HeaderMaybe.jpg');
+            --body-bg-image: url('/images/Body.jpg');
+            --footer-bg-image: url('/images/Footer (1).jpg');
             
             --body-bg: #05030A;
             --content-bg: rgba(12, 7, 18, 0.90);
@@ -288,21 +288,20 @@
         
         <!-- Header -->
         <div id="header">
-            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
+            <img src="/images/logo.png" alt="Cheirou Logo" class="logo">
         </div>
         
         <!-- Navigation Bar -->
         <div id="headerArea">
             <nav id="navbar">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="gear.html">Gear</a></li>
-                    <li><a href="bandcamp.html">Bandcamp/Merch</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="friends.html">Friends</a></li>
-                    <li><a href="games.html" style="text-decoration: underline; color: var(--text-color);">Games</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/gallery/">Gallery</a></li>
+                    <li><a href="/gear/">Gear</a></li>
+                    <li><a href="/bandcamp/">Bandcamp/Merch</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/friends/">Friends</a></li>
+                    <li><a href="/contact/">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -322,7 +321,7 @@
                     <!-- Game 1: Lawn Mower -->
                     <div class="game-card" onclick="loadGameRom('roms/Lawn_Mower.nes')">
                         <div class="game-cover-slot">
-                            <img src="images/covers/lawnmower.png" alt="Lawn Mower Cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:0.75rem; color:var(--link-color); padding:10px;\'>[ Lawn Mower Cover Art ]</span>';">
+                            <img src="/images/covers/lawnmower.png" alt="Lawn Mower Cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:0.75rem; color:var(--link-color); padding:10px;\'>[ Lawn Mower Cover Art ]</span>';">
                         </div>
                         <h3>Lawn Mower</h3>
                     </div>
@@ -330,7 +329,7 @@
                     <!-- Game 2: NeSnake 2 -->
                     <div class="game-card" onclick="loadGameRom('roms/NeSnake 2 (v1.3) (NTSC) (test).nes')">
                         <div class="game-cover-slot">
-                            <img src="images/covers/nesnake2.jpg" alt="NeSnake 2 Cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:0.75rem; color:var(--link-color); padding:10px;\'>[ NeSnake 2 Cover Art ]</span>';">
+                            <img src="/images/covers/nesnake2.jpg" alt="NeSnake 2 Cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:0.75rem; color:var(--link-color); padding:10px;\'>[ NeSnake 2 Cover Art ]</span>';">
                         </div>
                         <h3>NeSnake 2</h3>
                     </div>
@@ -389,8 +388,8 @@
                 </div>
 
                 <div class="games-button-container">
-                    <a href="games.html" title="Cheirou Games Landing Page">
-                        <img src="images/gamesicon.png" alt="Games">
+                    <a href="/games/" title="Cheirou Games Landing Page">
+                        <img src="/images/gamesicon.png" alt="Games">
                     </a>
                 </div>
 
