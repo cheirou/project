@@ -6,14 +6,14 @@
     <title>Cheirou - Games</title>
 
     <!-- Custom Tab Icon -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
 
     <style>
         /* Dark Palette Variables */
         :root {
-            --header-image: url('images/HeaderMaybe.jpg');
-            --body-bg-image: url('images/Body.jpg');
-            --footer-bg-image: url('images/Footer (1).jpg');
+            --header-image: url('/images/HeaderMaybe.jpg');
+            --body-bg-image: url('/images/Body.jpg');
+            --footer-bg-image: url('/images/Footer (1).jpg');
             
             --body-bg: #05030A;            /* Deepest shadow fallback */
             --content-bg: rgba(12, 7, 18, 0.90); /* Translucent charcoal/violet */
@@ -50,7 +50,7 @@
             margin: 20px auto;
             background-color: var(--content-bg);
             /* --- Add your image texture here --- */
-            background-image: url('images/gamesbg.jpg');
+            background-image: url('/images/gamesbg.jpg');
             background-repeat: repeat; /* or 'cover' depending on your image */
             background-position: center;
             /* ----------------------------------- */
@@ -242,20 +242,20 @@
         
         <!-- Header -->
         <div id="header">
-            <img src="images/logo.png" alt="Cheirou Logo" class="logo">
+            <img src="/images/logo.png" alt="Cheirou Logo" class="logo">
         </div>
         
         <!-- Navigation Menu Grid -->
         <div id="headerArea">
             <nav id="navbar">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="gallery/index.html">Gallery</a></li>
-                    <li><a href="gear/index.html">Gear</a></li>
-                    <li><a href="bandcamp/index.html">Bandcamp/Merch</a></li>
-                    <li><a href="blog/index.html">Blog</a></li>
-                    <li><a href="friends/index.html">Friends</a></li>
-                    <li><a href="contact/index.html">Contact</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/gallery/">Gallery</a></li>
+                    <li><a href="/gear/">Gear</a></li>
+                    <li><a href="/bandcamp/">Bandcamp/Merch</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/friends/">Friends</a></li>
+                    <li><a href="/contact/">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -274,49 +274,49 @@
                     <!-- Cheirou Block Card -->
                     <div class="game-card">
                         <a href="block.html" style="text-decoration: none;">
-                            <img src="images/block.png" alt="Cheirou Block" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <img src="/images/block.png" alt="Cheirou Block" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="game-card-img" style="display:none;">[ Block Game Image ]</div>
                             
                             <h3>Cheirou Block</h3>
                         </a>
-                        <p>40-line sprint stacker with SRS rotation, T-spins, and hold mechanics.</p>
-                        <a href="block.html">Play Game &rarr;</a>
+                        <p>40-line sprint stacker.</p>
+                        <a href="/games/block/">Play Game &rarr;</a>
                     </div>
 
                     <!-- Tendo NES Emulator Card -->
                     <div class="game-card">
-                        <a href="tendo.html" style="text-decoration: none;">
-                            <img src="images/tendo.png" alt="Cheirou Tendo Emulator" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <a href="/games/tendo/" style="text-decoration: none;">
+                            <img src="/images/tendo.png" alt="Cheirou Tendo Emulator" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="game-card-img" style="display:none;">[ Cheirou Tendo Emulator Image ]</div>
                             
                             <h3>Cheirou Tendo</h3>
                         </a>
-                        <p>In-browser NES emulator. Load any .nes ROM file to play 8-bit classics.</p>
-                        <a href="tendo.html">Launch Emulator &rarr;</a>
+                        <p>In-browser emulator.</p>
+                        <a href="tendo.html">Open Emulator &rarr;</a>
                     </div>
 
                     <!-- 3D PSX Engine Test Card -->
                     <div class="game-card">
-                        <a href="3d-demo.html" style="text-decoration: none;">
-                            <img src="images/3ddemo.png" alt="3D PSX Engine Test" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <a href="/games/3d-demo/" style="text-decoration: none;">
+                            <img src="/images/3ddemo.png" alt="3D PSX Engine Test" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="game-card-img" style="display:none;">[ 3D Demo Image ]</div>
                             
                             <h3>3D PSX Engine Test</h3>
                         </a>
-                        <p>32-bit low-poly WebGL test rendered at low internal resolution.</p>
-                        <a href="3d-demo.html">Launch Demo &rarr;</a>
+                        <p>32-bit WebGL test.</p>
+                        <a href="3d-demo.html">Open Demo &rarr;</a>
                     </div>
 
                     <!-- 3D Stormy Exploration Card -->
                     <div class="game-card">
-                        <a href="3d-exploration-demo.html" style="text-decoration: none;">
-                            <img src="images/3dexplore.png" alt="Stormy 3D World" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <a href="/games/3d-exploration-demo/" style="text-decoration: none;">
+                            <img src="/images/3dexplore.png" alt="Stormy 3D World" class="game-card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="game-card-img" style="display:none;">[ 3D Exploration Image ]</div>
                             
                             <h3>Stormy Environment</h3>
                         </a>
-                        <p>Atmospheric 3D exploration with rain, winding river, bridge, trees, and huts.</p>
-                        <a href="3d-exploration.html">Explore World &rarr;</a>
+                        <p>3D Exploration Demo</p>
+                        <a href="3d-exploration.html">Explore Demo &rarr;</a>
                     </div>
 
                 </div>
@@ -331,8 +331,8 @@
 
                 <!-- Games Landing Page Icon Button -->
                 <div class="games-button-container">
-                    <a href="games.html" title="Cheirou Games Landing Page">
-                        <img src="images/gamesicon.png" alt="Games">
+                    <a href="/games/" title="Cheirou Games Landing Page">
+                        <img src="/images/gamesicon.png" alt="Games">
                     </a>
                 </div>
 
