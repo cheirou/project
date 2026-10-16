@@ -9,20 +9,20 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
 
     <style>
-        /* Y2K Grimy & Glitchy Dark Palette Variables */
+        /* Dark Palette Variables */
         :root {
             --header-image: url('images/HeaderMaybe.jpg');
             --body-bg-image: url('images/Body.jpg');
             --footer-bg-image: url('images/Footer (1).jpg');
             
             --body-bg: #05030A;            /* Deepest shadow fallback */
-            --content-bg: rgba(12, 7, 18, 0.90); /* Grimy translucent charcoal/violet */
+            --content-bg: rgba(12, 7, 18, 0.90); /* Translucent charcoal/violet */
             --panel-bg: #140D1F;           /* Dark panel background */
-            --border-color: #2D1A3B;       /* Low-contrast grimy border */
+            --border-color: #2D1A3B;       /* Low-contrast border */
             --text-color: #EADEF0;         /* Weathered light pale lilac */
             
             --link-color: #A8C0D8;         /* Readable Grey-Blue */
-            --link-hover: #00FFFF;         /* Glitch cyan hover contrast */
+            --link-hover: #00FFFF;         /* Cyan hover contrast */
         }
 
         @font-face {
@@ -44,10 +44,16 @@
             box-sizing: border-box;
         }
 
-        #container {
+        /* --- this shit and the other one for background image --- */
+      #container {
             max-width: 900px;
             margin: 20px auto;
             background-color: var(--content-bg);
+            /* --- Add your image texture here --- */
+            background-image: url('images/gamesbg.jpg');
+            background-repeat: repeat; /* or 'cover' depending on your image */
+            background-position: center;
+            /* ----------------------------------- */
             padding: 15px;
             border: 2px solid var(--border-color);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
@@ -123,11 +129,14 @@
             gap: 15px;
         }
 
-        main {
+  /* --- the other one for background image dont forget this shit--- */
+          main {
             flex: 3;
-            background-color: rgba(20, 13, 31, 0.65);
+            /* Semi-transparent dark background lets the container texture show through */
+            background-color: rgba(20, 13, 31, 0.65); 
             padding: 20px;
             border: 1px dashed var(--border-color);
+            text-align: center;
         }
 
         aside {
